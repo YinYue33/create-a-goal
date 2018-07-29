@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var goalsController = require('../controller/goalsController');
+var goalsController = require('../manager/goalManager');
 
 router.post('/add', goalsController.addGoal);  
 router.delete('/delete', goalsController.deleteGoal);
