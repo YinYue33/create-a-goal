@@ -23,17 +23,16 @@ module.exports = function(passport) {
         passwordField : 'password',
         passReqToCallback : true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password, done) { 
-        if(!email || !password ) { return done(null, false, req.flash('message','All fields are required.')); }
+    function(req, email, password, done) {  
+        if(!email || !password ) { return done(null, false, { message: 'All fields required' }); }
         var salt = '7fa73b47df808d36c5fe328546ddef8b9011b2c6';
   
         db.User.getUserByEmail(email, function(err, rows){  
             if (err) {
-                return done(req.flash('message',err));
-            }   
-  
-            if(rows.length > 0){ 
-              return done(null, false, req.flash('message','email has been taken')); 
+                return done({ message: err });
+            } 
+            if(rows.length > 0){  
+              return done(null, false, req.flash('email', 'email taken')); 
             } 
             salt = salt+''+password; 
             var encPassword = crypto.createHash('sha1').update(salt).digest('hex');
@@ -44,8 +43,7 @@ module.exports = function(passport) {
                 sign_up_time: new Date()
             } 
             db.User.addOneUser(newUser, (err, result) => {
-                db.User.getUserByEmail(email, (err, result) => {
-                    console.log(result[0].id);
+                db.User.getUserByEmail(email, (err, result) => { 
                     return done(err, result[0]);
                 }) 
             });

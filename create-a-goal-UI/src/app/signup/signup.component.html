@@ -1,0 +1,39 @@
+<div class="container">
+
+    <div class="col-sm-6 col-sm-offset-3">
+
+        <h1>
+            <span class="fa fa-sign-in"></span> Signup</h1>
+        <!-- LOGIN FORM -->
+        <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input type="text" matInput formControlName="name" required>
+                <mat-error>I'd like to know your name</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input type="email" matInput formControlName="email" required>
+                <mat-error>Keep in touch!</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input type="password" matInput formControlName="password" required>
+                <mat-error>Don't forget about your password!</mat-error>
+            </mat-form-field>
+
+            <button class="btn btn-danger btn-lg" mat-button type="submit" [disabled]="!signupForm.valid">Submit</button>
+        </form>
+
+        <hr>
+
+        <p>Already have an account?
+            <a routerLink="../login">Login</a>
+        </p>
+        <p>Or go
+            <a routerLink="home">home</a>.</p>
+
+    </div>
+</div>
