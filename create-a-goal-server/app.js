@@ -45,10 +45,8 @@ app.post('/api/signup', passport.authenticate('local-signup', {
 
 app.use('/api/goals', goalsRoute);
 app.use('/api/user', userRoute);
-app.get('/api/signupFail', (req, res, next) => {
-  //res.flash('message','fail')   
-  console.log(req.flash('email'));
-  res.status(403).send(req.message);
+app.get('/api/signupFail', (req, res, next) => { 
+  res.status(403).send(req.flash('message'));
 })
 
 // catch 404 and forward to error handler

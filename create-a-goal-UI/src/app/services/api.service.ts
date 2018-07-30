@@ -17,13 +17,13 @@ export class ApiService {
     for(let key in params) {
       httpParams = httpParams.append(key, params[key]);
     }
-    return this.http.get<any[]>('http://localhost:3000/api' + router + action, {params: httpParams})
+    return this.http.get<any[]>('/api' + router + action, {params: httpParams})
         .pipe(retry(1),
         catchError(this.handleError));
   }
 
   post(router: string, action: string, data): Observable<any> {
-    return this.http.post<any>('http://localhost:3000/api' + router + action, data, { observe: "response"}).pipe(catchError(this.handleError));
+    return this.http.post<any>('/api' + router + action, data, { observe: "response"}).pipe(catchError(this.handleError));
   } 
 
   private handleError(err: HttpErrorResponse){

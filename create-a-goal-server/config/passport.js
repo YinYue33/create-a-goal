@@ -32,7 +32,7 @@ module.exports = function(passport) {
                 return done({ message: err });
             } 
             if(rows.length > 0){  
-              return done(null, false, req.flash('email', 'email taken')); 
+              return done(null, false, req.flash('message', 'email taken')); 
             } 
             salt = salt+''+password; 
             var encPassword = crypto.createHash('sha1').update(salt).digest('hex');
