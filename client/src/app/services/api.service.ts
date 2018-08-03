@@ -26,6 +26,14 @@ export class ApiService {
     return this.http.post<any>('/api' + router + action, data);
   } 
 
+  delete(router: string, action: string, params): Observable<any>{
+    let httpParams = new HttpParams();
+    for(let key in params) {
+      httpParams = httpParams.append(key, params[key]);
+    }
+    return this.http.delete<any>('/api' + router + action, {params: httpParams});
+  }
+
   private handleError(err: HttpErrorResponse){ 
    
       return throwError('error!');

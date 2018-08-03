@@ -18,8 +18,14 @@ export class GoalComponent implements OnInit {
   }
 
   join() {
-      this.api.post('/goal', '/join', {goalID: this.goal.id}).subscribe(res => {
-        this.router.navigate(['home']);
+      this.api.post('/goal', '/join', {goalID: this.goal._id}).subscribe(res => {
+        this.goal = res; 
+      })
+  }
+
+  delete() {
+      this.api.delete('/goal', '/delete', {id: this.goal._id}).subscribe(res => {
+         
       })
   }
 

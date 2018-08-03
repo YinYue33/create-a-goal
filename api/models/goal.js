@@ -1,4 +1,6 @@
-var mongoose = require( 'mongoose' );   
+var mongoose = require( 'mongoose' ); 
+var ObjectId =  mongoose.Schema.ObjectId;
+ 
 
 var goalSchema = new mongoose.Schema({ 
     title: {

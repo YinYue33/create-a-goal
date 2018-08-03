@@ -6,9 +6,10 @@ var auth = require('../config/auth');
 
 router.get('/get/all', goalsManager.getAllGoals);
 
-router.use(auth.isLoggedIn);
+//router.use(auth.isLoggedIn);
 router.post('/add', goalsManager.addGoal); 
 router.get('/get/created', goalsManager.getCreatedGoals); 
 router.post('/join', goalsManager.joinGoal);
+router.delete('/delete', goalsManager.deleteGoal);
 
 module.exports = router;
