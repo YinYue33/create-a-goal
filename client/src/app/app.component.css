@@ -22,3 +22,9 @@ li a {
 li a:hover {
     background-color: #111;
 }
+
+.center {
+    margin: auto;  
+    padding: 10px; 
+    width: 80%;
+}
