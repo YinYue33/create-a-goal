@@ -1,4 +1,4 @@
-var db = require('../repository/createAGoalDB').Goal;
+ var Goal = require()
 
 exports.addGoal = (req, res, next) => { 
     let start = new Date(req.body.startDate); 

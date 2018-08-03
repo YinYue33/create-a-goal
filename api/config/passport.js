@@ -1,78 +1,65 @@
 // load all the things we need
-var LocalStrategy = require('passport-local').Strategy; 
-var db =  require('../repository/createAGoalDB'); 
+var LocalStrategy = require('passport-local').Strategy;
 var crypto = require('crypto');
- 
+var User = require('../models/user');
+
 
 // expose this function to our app using module.exports
-module.exports = function(passport) {  
+module.exports = function (passport) {
     passport.serializeUser((user, done) => {
-        done(null, user.id);  
+        done(null, user._id);
     });
 
     // used to deserialize the user
     passport.deserializeUser((id, done) => {
-        db.User.getUserById(id, (err, result) => { 
-            done(err, result[0]);
-        }); 
-    }); 
+        User.findById(id, function (err, user) {
+            done(err, user);
+        });
+    });
 
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
-        usernameField : 'email',
-        passwordField : 'password',
-        passReqToCallback : true // allows us to pass back the entire request to the callback
+        usernameField: 'email',
+        passwordField: 'password',
+        passReqToCallback: true // allows us to pass back the entire request to the callback
     },
-    function(req, email, password, done) {
-        let name = req.body.name; 
-        if(!email || !password || !name) { 
-            return done(null, false, req.flash( 'error', 'All fields required')); 
-        }
-        db.User.getUserByEmailOrName(email, name, handleCheckDuplicate(req, done));
-    })); 
+        function (req, email, password, done) {
+            let name = req.body.name;
+            if (!email || !password || !name) {
+                return done(null, false, req.flash('error', 'All fields required'));
+            }
+            User.findOne({ 'email': email }, (err, user) => {
+                if (err) return done(err);
+                if (user) return done(null, false, req.flash('error', 'email taken'));
+                User.findOne({ 'name': req.body.name }, (err, user) => {
+                    if (err) return done(err);
+                    if (user) return done(null, false, req.flash('error', 'name taken'));
+                    var newUser = new User(); 
+                    newUser.name = req.body.name;
+                    newUser.email = email;
+                    newUser.setPassword(password);
+                    newUser.save(err => {
+                        if(err) return done(err); 
+                        return done(null, newUser);
+                    })
+                }); 
+            });
+        }));
 
     passport.use('local-login', new LocalStrategy({
-        passReqToCallback : true
+        passReqToCallback: true
     },
-    function(req, username, password, done) {
-        if(!username || !password) { 
-            return done(null, false, req.flash('error', 'All fields required')); 
-        }
-        db.User.getUserByUsername(username, (err, result) => {
-            if(err) return done(err);
-            if(result.length === 0){  
-                return done(null, false,req.flash('error', 'User doesn\'t exist, sign up first')); 
+        function (req, username, password, done) {
+            if (!username || !password) {
+                return done(null, false, req.flash('error', 'All fields required'));
             }
-            let user = result[0]; 
-            if(crypto.pbkdf2Sync(password, user.salt, 1000, 64, 'sha512').toString('hex') !== user.hash){
-                return done(null, false, req.flash('error', 'Password and Username doesn\' match'));
-            };
-            return done(null, user);
-        });
-    })); 
-};
- 
-function handleCheckDuplicate(req, done){
-    return (err, result) => {
-        if (err) {
-            return done(err);
-        } 
-        if(result.length > 0){  
-          return done(null, false, req.flash('error', 'email or username taken')); 
-        } 
-        let newUser = {
-            name: req.body.name,
-            email: req.body.email,
-            sign_up_time: new Date()
-        } 
-        newUser.salt = crypto.randomBytes(16).toString('hex');
-        newUser.hash = crypto.pbkdf2Sync(req.body.password, newUser.salt, 1000, 64, 'sha512').toString('hex');
-        db.User.addOneUser(newUser, (err) => {
-            if(err) return done(err);
-            db.User.getUserByEmail(req.body.email, (err, result) => { 
-                if(err) return done(err);
-                return done(null, result[0]);
-            }) 
-        });
-    } 
-} 
+            User.findOne({ $or: [ { 'email': username }, { 'name': username } ] }, (err, user) => {
+                if(err) return done(err); 
+                if(!user) return done(null, false, req.flash('error', 'username not exist'));
+                if(!user.validPassword(password)){
+                    return done(null, false, req.flash('error', 'username and password doesn\'t match'));
+                }
+                return done(null, user);
+            });
+        }));
+}; 
