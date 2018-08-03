@@ -23,7 +23,7 @@ export class ApiService {
   }
 
   post(router: string, action: string, data): Observable<any> {
-    return this.http.post<any>('/api' + router + action, data, { observe: "response"});
+    return this.http.post<any>('/api' + router + action, data);
   } 
 
   private handleError(err: HttpErrorResponse){ 

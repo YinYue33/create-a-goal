@@ -8,10 +8,6 @@ var auth = require('../config/auth');
 router.use(auth.isLoggedIn);
 
 router.get('/get/:id', auth.isSelf, userManager.getUserByID); 
-router.get('/profile', userManager.getUserByID); 
-router.get('/suctest', (req,res,next) => { 
-    console.log(req);
-    res.send('secret');
-} )
+router.get('/profile', userManager.getUserByID);  
 
 module.exports = router;

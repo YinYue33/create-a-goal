@@ -1,22 +1,37 @@
-var db = require('../repository/createAGoalDB').CreateAGoaldb;
+var db = require('../repository/createAGoalDB').Goal;
 
 exports.addGoal = (req, res, next) => { 
-    res.send("added a goal not implemented");
-}
+    let start = new Date(req.body.startDate); 
+    let end = new Date(req.body.endDate);   
+    req.body.startDate = `${start.getFullYear()}-${start.getMonth()}-${start.getDate()}`; 
+    req.body.endDate = `${end.getFullYear()}-${end.getMonth()}-${end.getDate()}`;
+  
+    req.body.creator = req.user.id;  
+    db.addGoal(req.body, handleResult(res, next));
+} 
 
+exports.getCreatedGoals = (req, res, next) =>{
+    db.getCreatedGoals(req.user.id, handleResult(res, next)) 
+};
 
-exports.getGoals = (req, res, next) =>{
-    res.send("get goals not implemented");
-}
-
-exports.getGoal = (req, res, next) =>{
-    res.send("get a goal not implemented");
-}
-
-exports.updateGoal = (req, res, next) =>{
-    res.send("update a goal not implemented");
-}
+exports.getAllGoals = (req, res, next) =>{
+    db.getAllGoals(handleResult(res, next));
+}; 
 
 exports.deleteGoal = (req, res, next) =>{
-    res.send("delete a goal not implemented");
+    db.deleteGoal(req.params.id, handleResult(res, next));
+}
+
+exports.joinGoal = (req, res, next) => {
+    db.joinGoal(req.body.goalID, req.user.id, handleResult(res, next));
+}
+
+function handleResult(res, next){
+    return (err, result) => {
+        if(err){
+            next(createError(500));
+        }else{
+            res.status(200).send(result);
+        }
+    } 
 }

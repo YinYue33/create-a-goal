@@ -1,3 +1,3 @@
-<p>
-  home works!
-</p>
+<ng-container *ngFor="let goal of createdGoals">
+  <app-goal [goal]="goal" [isCreator]="true"></app-goal>
+</ng-container>

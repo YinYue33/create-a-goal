@@ -10,9 +10,14 @@ import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router'; 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatNativeDateModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './services/auth-interceptor';
+import { CreateAGoalComponent } from './create-a-goal/create-a-goal.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { GoalComponent } from './goal/goal.component';
+import { PublicComponent } from './public/public.component';
+
 
 export const routeConfig: Routes = [
   {
@@ -20,12 +25,20 @@ export const routeConfig: Routes = [
       component: HomeComponent
   }, 
   {
+    path: 'public',
+    component: PublicComponent
+  },
+  {
       path: 'signup',
       component: SignupComponent
   }, 
   {
       path: 'login',
       component: LoginComponent
+  },
+  {
+    path: 'create-a-goal',
+    component: CreateAGoalComponent
   },
   {
       path: '',
@@ -44,7 +57,10 @@ export const routeConfig: Routes = [
     AppComponent,
     HomeComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    CreateAGoalComponent,
+    GoalComponent,
+    PublicComponent
   ],
   imports: [
     BrowserModule, 
@@ -54,7 +70,9 @@ export const routeConfig: Routes = [
     MatFormFieldModule, 
     MatInputModule,
     FormsModule, 
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

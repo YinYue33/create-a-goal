@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
+import { Goal } from '../models/goal.model';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  createdGoals: Goal[]; 
+
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
+    this.api.get('/goal', '/get/created', {}).subscribe(res => {
+      this.createdGoals = res;
+    })
   }
 
 }

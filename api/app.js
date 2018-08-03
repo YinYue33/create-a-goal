@@ -35,7 +35,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(express.static(path.join(__dirname, 'public'))); 
 
 app.get('/api/isLoggedIn', (req, res) => {
-  res.status(200).send(req.isAuthenticated());
+  res.status(200).send(req.user);
 })
 
 app.post('/api/signup', (req, res, next) => {
@@ -44,7 +44,7 @@ app.post('/api/signup', (req, res, next) => {
     if (!user) { return res.status(401).send(req.flash('error')); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.status(200).send(JSON.stringify('ok'));
+      return res.status(200).send(user);
     });
   })(req, res, next);
 }); 
@@ -55,17 +55,17 @@ app.post('/api/login', (req, res, next) => {
     if (!user) { return res.status(401).send(req.flash('error')); }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
-      return res.status(200).send(JSON.stringify('ok'));
+      return res.status(200).send(user);
     });
   })(req, res, next);
 }); 
 
-app.use('/api/goals', goalsRoute);
+app.use('/api/goal', goalsRoute);
 app.use('/api/user', userRoute); 
 
 app.get('/api/logout', function(req, res){
   req.logout();
-  res.send('logged out sucessfully!');
+  res.status(200).send();
 }); 
  
 app.use(function(req, res, next) {
