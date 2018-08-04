@@ -7,16 +7,16 @@ import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 
-import { RouterModule, Routes } from '@angular/router'; 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule, Routes, Router } from '@angular/router'; 
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatFormFieldModule, MatInputModule, MatNativeDateModule } from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthInterceptor } from './services/auth-interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import { CreateAGoalComponent } from './create-a-goal/create-a-goal.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { GoalComponent } from './goal/goal.component';
-import { PublicComponent } from './public/public.component';
+import { PublicComponent } from './public/public.component'; 
+
 
 
 export const routeConfig: Routes = [
@@ -74,11 +74,7 @@ export const routeConfig: Routes = [
     MatDatepickerModule,
     MatNativeDateModule
   ],
-  providers: [{
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-  }],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

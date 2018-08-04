@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticateService } from '../services/authenticate.service';
+import { ApiService } from '../services/api.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router'
 
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private auth: AuthenticateService,
+  constructor(private api: ApiService,
               private router: Router) { 
     this.loginForm = new FormGroup({
       username: new FormControl(null, Validators.required), 
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  onLogin(){ 
-     this.auth.login(this.loginForm.value);
+  login(){ 
+     this.api.login(this.loginForm.value);
      this.router.navigate(['/home']);
   }
 

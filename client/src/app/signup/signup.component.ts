@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticateService } from '../services/authenticate.service';
+import { ApiService } from '../services/api.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -13,7 +13,7 @@ export class SignupComponent implements OnInit {
   signupForm: FormGroup; 
   private signupErrorMessage: string;
 
-  constructor(private auth: AuthenticateService,
+  constructor(private api: ApiService,
               private router: Router) { 
     this.signupForm = new FormGroup({
       name: new FormControl(null, Validators.required),
@@ -26,8 +26,8 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSignup(){   
-      this.auth.signup(this.signupForm.value); 
+  signup(){   
+      this.api.signup(this.signupForm.value); 
       this.router.navigate(['/home']);
   }
 

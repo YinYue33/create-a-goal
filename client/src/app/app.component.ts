@@ -1,28 +1,26 @@
 import { Component } from '@angular/core';
-import { AuthenticateService } from './services/authenticate.service';
+import { ApiService } from './services/api.service';
 import { Router } from '@angular/router';
+import { User } from './models/user.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'create-a-goal-UI';
-  isLoggedIn: boolean;
-  username: string;
-  _loginSubscription: any;
-  _usernameSubscription: any;
+export class AppComponent {  
+   
+  user: User;
+  _userSubscription: any; 
 
-  constructor(public auth : AuthenticateService,
+  constructor(public api : ApiService,
   private router : Router){
-      this._loginSubscription = this.auth.isLoggedInChange.subscribe(res => this.isLoggedIn = res);
-      this._usernameSubscription = this.auth.usernameChange.subscribe(res => { 
-        this.username = res
-      });
+      this._userSubscription = this.api.userChange.subscribe(user => { 
+        this.user = user
+      }); 
   }
 
   logout(){
-    this.auth.logout();
+    this.api.logout();
     this.router.navigate(['/login']);
   }
 }

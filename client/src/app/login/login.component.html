@@ -5,7 +5,7 @@
         <h1><span class="fa fa-sign-in"></span> Login</h1> 
     
         <!-- LOGIN FORM -->
-        <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
                 <mat-form-field appearance="outline">
                     <mat-label>Username</mat-label>
                     <input type="text" matInput formControlName="username" required>
