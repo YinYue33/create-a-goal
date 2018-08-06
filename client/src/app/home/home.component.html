@@ -1,5 +1,14 @@
  
+<h1>Created</h1>
 <ng-container *ngFor="let goal of createdGoals">
-  <app-goal [goal]="goal" [isCreator]="true"></app-goal>
+  <app-goal [goal]="goal" [isCreator]="true" [loggedin]="true"></app-goal>
 </ng-container>
+
+<p></p>
+
+<h1>Joined</h1>
+<ng-container *ngFor="let goal of joinedGoals">
+    <app-goal [goal]="goal" [isCreator]="false" [joined]="true" [loggedin]="true"></app-goal>
+</ng-container>
+ 
  

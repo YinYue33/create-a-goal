@@ -3,19 +3,16 @@ import { HttpClient, HttpErrorResponse, HttpParams, HttpHeaders } from '@angular
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { User } from '../models/user.model';
+ 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApiService {
-
-  public userChange: Subject<User>;
+export class ApiService { 
 
   constructor(private http: HttpClient,
     private router: Router) {
-    this.userChange = new Subject<User>();
+    
   }
 
   get(router: string, action: string, params): Observable<any> {
@@ -45,26 +42,6 @@ export class ApiService {
         self.userChange.next(null);
       }
       return throwError(err.error);
-    }
-  }
-
-  logout(){
-    this.get('','/logout',{}).subscribe(
-      res => { 
-        this.userChange.next(null); 
-      }
-    ); 
-  };
-
-  signup(signupInfo){ 
-    this.post('', '/signup', signupInfo).subscribe(user => { 
-         this.userChange.next(user);
-      });   
-  };
-
-  login(loginInfo) {
-    this.post('', '/login', {username: loginInfo.username, password: loginInfo.password}).subscribe(user => { 
-          this.userChange.next(user);
-      });
-  };
+    } 
+  } 
 }

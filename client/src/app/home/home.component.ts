@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ApiService } from '../services/api.service'; 
 import { Goal } from '../models/goal.model';
 
@@ -12,11 +12,15 @@ export class HomeComponent implements OnInit {
   createdGoals: Goal[]; 
   joinedGoals: Goal[];
 
+
   constructor(private api: ApiService) { }
 
   ngOnInit() {
     this.api.get('/goal', '/get/created', {}).subscribe(res => {
       this.createdGoals = res;
+    });
+    this.api.get('/goal', '/get/joined', {}).subscribe(res => {
+      this.joinedGoals = res;
     })
   }
 

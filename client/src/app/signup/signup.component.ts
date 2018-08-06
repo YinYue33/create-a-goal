@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -14,7 +15,8 @@ export class SignupComponent implements OnInit {
   private signupErrorMessage: string;
 
   constructor(private api: ApiService,
-              private router: Router) { 
+              private router: Router,
+            private auth: AuthService) { 
     this.signupForm = new FormGroup({
       name: new FormControl(null, Validators.required),
       email: new FormControl(null, Validators.required),
@@ -27,7 +29,7 @@ export class SignupComponent implements OnInit {
   }
 
   signup(){   
-      this.api.signup(this.signupForm.value); 
+      this.auth.signup(this.signupForm.value); 
       this.router.navigate(['/home']);
   }
 

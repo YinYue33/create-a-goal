@@ -12,6 +12,9 @@ export class GoalComponent implements OnInit {
 
   @Input()goal: Goal;
   @Input()isCreator: boolean;
+  @Input()joined: boolean;
+  @Input()loggedin: boolean;
+
   constructor(private api: ApiService, private router: Router) { }
 
   ngOnInit() {
@@ -20,6 +23,7 @@ export class GoalComponent implements OnInit {
   join() {
       this.api.post('/goal', '/join', {goalID: this.goal._id}).subscribe(res => {
         this.goal = res; 
+        this.joined = true;
       })
   }
 
@@ -27,6 +31,13 @@ export class GoalComponent implements OnInit {
       this.api.delete('/goal', '/delete', {id: this.goal._id}).subscribe(res => {
          
       })
+  }
+
+  quit(){
+    this.api.post('/goal', '/quit', {goalID: this.goal._id}).subscribe(res => {
+        this.goal = res;
+        this.joined = false;
+    })
   }
 
 }

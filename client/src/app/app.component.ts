@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from './services/api.service';
+import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 import { User } from './models/user.model';
 @Component({
@@ -7,20 +8,22 @@ import { User } from './models/user.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {  
-   
-  user: User;
-  _userSubscription: any; 
+export class AppComponent {
 
-  constructor(public api : ApiService,
-  private router : Router){
-      this._userSubscription = this.api.userChange.subscribe(user => { 
-        this.user = user
-      }); 
+  user: User;
+  _userSubscription: any;
+
+  constructor(public api: ApiService,
+    public auth: AuthService,
+    private router: Router) {
+    this.user = auth.user;
+    this._userSubscription = this.auth.userChange.subscribe(user => {
+      this.user = user;
+    });
   }
 
-  logout(){
-    this.api.logout();
+  logout() {
+    this.auth.logout();
     this.router.navigate(['/login']);
   }
 }
