@@ -12,9 +12,9 @@ import { CreateAGoalComponent } from './create-a-goal/create-a-goal.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { GoalComponent } from './goal/goal.component';
 import { PublicComponent } from './public/public.component';
-import { ProfileComponent } from './profile/profile.component';
-import { GoalForumComponent } from './goal-forum/goal-forum.component';
+import { ProfileComponent } from './profile/profile.component'; 
 import { AppRoutingModule } from './app-routing.module';
+import { GoalForumModule } from './goal-forum/goal-forum.module';
 
  
 @NgModule({
@@ -26,8 +26,7 @@ import { AppRoutingModule } from './app-routing.module';
     CreateAGoalComponent,
     GoalComponent,
     PublicComponent,
-    ProfileComponent,
-    GoalForumComponent
+    ProfileComponent
   ],
   imports: [
     BrowserModule, 
@@ -39,6 +38,7 @@ import { AppRoutingModule } from './app-routing.module';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    GoalForumModule,
     AppRoutingModule
   ],
   providers: [],

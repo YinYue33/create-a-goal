@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-@Component({
-  selector: 'app-goal-forum',
+@Component({ 
   templateUrl: './goal-forum.component.html',
   styleUrls: ['./goal-forum.component.css']
 })
 export class GoalForumComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() { 
+      console.log(this.route.snapshot.paramMap.get('id'));
   }
 
 }
