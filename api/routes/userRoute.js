@@ -6,8 +6,8 @@ var User = require('../models/user');
 
 /* GET users listing. */
 
-//router.use(auth.isLoggedIn);
-
+router.use(auth.isLoggedIn);
+router.put('/put', userManager.putUser);
 router.get('/get/all', (req, res, next) => {  
      User.find((err, users) => {
          if(err) next(err);

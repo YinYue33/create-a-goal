@@ -28,3 +28,8 @@ li a:hover {
     padding: 10px; 
     width: 80%;
 }
+
+img { 
+    width: 5%;
+    height: 5%;
+}

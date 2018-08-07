@@ -1,12 +1,10 @@
-<div class="container">
-
-    <div class="col-sm-6 col-sm-offset-3">
-
+<div class="container centered"> 
+    <div> 
         <h1>
             <span class="fa fa-sign-in"></span> Signup</h1>
         <!-- LOGIN FORM -->
         <h1 *ngIf="signupErrorMessage !== null">Sign up failed! {{signupErrorMessage}}</h1>
-        <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+        <form [formGroup]="signupForm" (ngSubmit)="signup()">
             <mat-form-field appearance="outline">
                 <mat-label>Username</mat-label>
                 <input type="text" matInput formControlName="name" required>
@@ -33,8 +31,6 @@
         <p>Already have an account?
             <a routerLink="../login">Login</a>
         </p>
-        <p>Or go
-            <a routerLink="home">home</a>.</p>
 
     </div>
 </div>

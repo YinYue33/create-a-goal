@@ -35,11 +35,14 @@ export class ApiService {
     return this.http.delete<any>('/api' + router + action, { params: httpParams }).pipe(catchError(this.handleError(this)));
   }
 
+  put(router: string, action: string, data): Observable<any>{
+    return this.http.put<any>('/api'+ router + action, data).pipe(catchError(this.handleError(this)));
+  }
+
   private handleError(self) {
     return (err: HttpErrorResponse) => {
       if (err.status === 401 || err.status === 403) {
         self.router.navigate(['/login']);
-        self.userChange.next(null);
       }
       return throwError(err.error);
     } 

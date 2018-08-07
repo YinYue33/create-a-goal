@@ -15,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateAGoalComponent } from './create-a-goal/create-a-goal.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { GoalComponent } from './goal/goal.component';
-import { PublicComponent } from './public/public.component'; 
+import { PublicComponent } from './public/public.component';
+import { ProfileComponent } from './profile/profile.component'; 
 
 
 
@@ -27,6 +28,10 @@ export const routeConfig: Routes = [
   {
     path: 'public',
     component: PublicComponent
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent
   },
   {
       path: 'signup',
@@ -60,7 +65,8 @@ export const routeConfig: Routes = [
     LoginComponent,
     CreateAGoalComponent,
     GoalComponent,
-    PublicComponent
+    PublicComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule, 

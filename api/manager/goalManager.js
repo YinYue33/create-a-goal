@@ -50,9 +50,7 @@ exports.join = (req, res, next) => {
 exports.quit = (req, res, next) => {
     Goal.findById(req.body.goalID, (err, result) => {
         if (err) next(err);
-        else {
-            console.log(result.participants);
-            console.log(req.user._id);
+        else { 
             let index = result.participants.indexOf(req.user._id);
             if (index === -1) return next('you are not in the goal now!');
             result.participants.splice(index, 1);

@@ -29,8 +29,7 @@ export class SignupComponent implements OnInit {
   }
 
   signup(){   
-      this.auth.signup(this.signupForm.value); 
-      this.router.navigate(['/home']);
+      this.auth.signup(this.signupForm.value);
   }
 
 }

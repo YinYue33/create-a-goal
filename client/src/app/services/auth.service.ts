@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
 import { Subject } from 'rxjs';
 import { ApiService } from '../services/api.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
   public userChange: Subject<User>;
   public user: User;
 
-  constructor(private api: ApiService) {
+  constructor(private api: ApiService, private router: Router) {
     this.userChange = new Subject<User>();
     this.api.get('', '/isLoggedIn', {}).subscribe(user => {
       this.user = user;
@@ -19,11 +20,19 @@ export class AuthService {
     })
   }
 
+  updateProfile(profile){
+    this.api.post('/user', '/put', profile).subscribe(user => {
+      this.user = user;
+      this.userChange.next(user);
+    });
+  }
+
   logout() {
     this.api.get('', '/logout', {}).subscribe(
       res => {
         this.user = null;
         this.userChange.next(null);
+        this.router.navigate(['/login']);
       }
     );
   };
@@ -32,6 +41,7 @@ export class AuthService {
     this.api.post('', '/signup', signupInfo).subscribe(user => {
       this.user = user;
       this.userChange.next(user);
+      this.router.navigate(['/home']);
     });
   };
 
@@ -39,6 +49,7 @@ export class AuthService {
     this.api.post('', '/login', { username: loginInfo.username, password: loginInfo.password }).subscribe(user => {
       this.user = user;
       this.userChange.next(user);
+      this.router.navigate(['/home']);
     });
   };
 }

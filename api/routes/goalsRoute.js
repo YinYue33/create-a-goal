@@ -3,10 +3,9 @@ var router = express.Router();
 var goalsManager = require('../manager/goalManager');
 var auth = require('../config/auth'); 
 
-
-router.use(auth.isLoggedIn);
-
 router.get('/get/all', goalsManager.getAll); 
+
+router.use(auth.isLoggedIn); 
 router.get('/get/created', goalsManager.getCreated);
 router.get('/get/joined', goalsManager.getJoined);
 

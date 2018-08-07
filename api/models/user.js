@@ -16,6 +16,9 @@ var userSchema = new mongoose.Schema({
         type: Number,
         default: 100 
     }, 
+    photo: {  
+        type: String
+    },
     hash: String,
     salt: String
 });

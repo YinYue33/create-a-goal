@@ -19,8 +19,8 @@ app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 //app.use(cookieParser('Thespywhodumpedme'));
-app.use(bodyParser.urlencoded({ extended: false })) 
-app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({limit: '5mb'}, { extended: false })) 
+app.use(bodyParser.json({limit: '5mb'})); 
 
 var goalsRoute = require('./routes/goalsRoute');
 var userRoute = require('./routes/userRoute');

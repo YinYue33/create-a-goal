@@ -1,7 +1,7 @@
 <div class="card" style="width: 80%; margin: 20px">
     <div class="card-header">
         {{goal.title}}
-        <span style="float: right">
+        <span style="float: right" *ngIf="loggedin">
             <a *ngIf="isCreator" class="btn btn-danger" style="color: white" (click)="delete()" aria-label="Delete">
                 <i class="fa fa-trash-o" aria-hidden="true"></i>
             </a>
