@@ -4,7 +4,7 @@ exports.putUser = (req, res, next) => {
     User.findById(req.user._id, (err, user) => { 
         user.name = req.body.name || user.name;
         user.email = req.body.email || user.email; 
-        user.photo = req.body.photo;  
+        user.photo = req.body.photo || user.photo;  
         user.save((err) => { 
             if(err) next(err);
             else{

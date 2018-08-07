@@ -1,4 +1,4 @@
-<ng-container *ngIf="user !== null">
+<ng-container *ngIf="user">
     login
     <app-goal *ngFor="let goal of goals" [loggedin] = "true" [goal]="goal" [isCreator]="goal.creator == user._id" [joined] = "joined(goal)">
     </app-goal>

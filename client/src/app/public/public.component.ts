@@ -19,6 +19,9 @@ export class PublicComponent implements OnInit {
     private router: Router,
   private auth: AuthService) {  
     this.user = auth.user;
+    this._userSubscription = this.auth.userChange.subscribe(user => {
+      this.user = user;
+    });
   }
 
   ngOnInit() {

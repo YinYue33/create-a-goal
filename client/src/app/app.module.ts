@@ -1,62 +1,22 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-
+import { NgModule } from '@angular/core'; 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
-
-import { RouterModule, Routes, Router } from '@angular/router'; 
-import { HttpClientModule } from '@angular/common/http';
-
+import { LoginComponent } from './login/login.component'; 
+import { HttpClientModule } from '@angular/common/http'; 
 import { MatFormFieldModule, MatInputModule, MatNativeDateModule } from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateAGoalComponent } from './create-a-goal/create-a-goal.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { GoalComponent } from './goal/goal.component';
 import { PublicComponent } from './public/public.component';
-import { ProfileComponent } from './profile/profile.component'; 
+import { ProfileComponent } from './profile/profile.component';
+import { GoalForumComponent } from './goal-forum/goal-forum.component';
+import { AppRoutingModule } from './app-routing.module';
 
-
-
-export const routeConfig: Routes = [
-  {
-      path: 'home',
-      component: HomeComponent
-  }, 
-  {
-    path: 'public',
-    component: PublicComponent
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent
-  },
-  {
-      path: 'signup',
-      component: SignupComponent
-  }, 
-  {
-      path: 'login',
-      component: LoginComponent
-  },
-  {
-    path: 'create-a-goal',
-    component: CreateAGoalComponent
-  },
-  {
-      path: '',
-      redirectTo: '/home',
-      pathMatch: 'full'
-  },
-  {
-      path: '**',
-      redirectTo: '/home',
-      pathMatch: 'full'
-  }
-];
-
+ 
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,19 +26,20 @@ export const routeConfig: Routes = [
     CreateAGoalComponent,
     GoalComponent,
     PublicComponent,
-    ProfileComponent
+    ProfileComponent,
+    GoalForumComponent
   ],
   imports: [
     BrowserModule, 
-    RouterModule.forRoot(routeConfig),
     HttpClientModule,
     BrowserAnimationsModule,
-    MatFormFieldModule, 
+    MatFormFieldModule,
     MatInputModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

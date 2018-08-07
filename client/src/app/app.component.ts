@@ -16,7 +16,7 @@ export class AppComponent {
   constructor(public api: ApiService,
     public auth: AuthService,
     private router: Router) {
-    this.user = auth.user;
+    this.user = this.auth.user;
     this._userSubscription = this.auth.userChange.subscribe(user => {
       this.user = user;
     });

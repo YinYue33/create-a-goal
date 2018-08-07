@@ -9,19 +9,19 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  public userChange: Subject<User>;
-  public user: User;
+  userChange: Subject<User>;
+  user: User;
 
   constructor(private api: ApiService, private router: Router) {
     this.userChange = new Subject<User>();
     this.api.get('', '/isLoggedIn', {}).subscribe(user => {
-      this.user = user;
+      this.user = user; 
       this.userChange.next(this.user);
-    })
+    });
   }
 
   updateProfile(profile){
-    this.api.post('/user', '/put', profile).subscribe(user => {
+    this.api.put('/user', '/put', profile).subscribe(user => {
       this.user = user;
       this.userChange.next(user);
     });

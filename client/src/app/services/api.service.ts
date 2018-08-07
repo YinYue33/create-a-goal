@@ -40,7 +40,7 @@ export class ApiService {
   }
 
   private handleError(self) {
-    return (err: HttpErrorResponse) => {
+    return (err: HttpErrorResponse) => { 
       if (err.status === 401 || err.status === 403) {
         self.router.navigate(['/login']);
       }

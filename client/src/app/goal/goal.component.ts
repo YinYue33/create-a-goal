@@ -40,4 +40,8 @@ export class GoalComponent implements OnInit {
     })
   }
 
+  detail(){
+    this.router.navigate(['/forum', this.goal]);
+  }
+
 }
