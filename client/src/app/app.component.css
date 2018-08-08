@@ -1,24 +1,6 @@
 .header{
     padding: 20px;  
-}
-
-.cover-picture{
-    background-image:url("../assets/hero-image.jpg");
-    height: 400px;
-    width: 100%;
-    overflow: hidden;
-}
-
-.title{
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 100;
-    font-size: 25pt;
 } 
-
-.title-group{
-    padding: 80px;
-}
 
 .auth{
     float: right;
@@ -45,9 +27,10 @@ li a:hover {
     height: 40px;
     object-fit: cover; 
 }
+
 li a {
     display: block;
-    color: white;
+    color: black;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;

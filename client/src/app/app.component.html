@@ -1,42 +1,41 @@
 <!--The content below is only a placeholder and can be replaced.-->
 
 
-<div class="cover-picture">
-    <div class="header"> 
-        <ul>
-            <li>
-                <a routerLink="home">Create A Goal</a>
-            </li>
-            <li>
-                <a routerLink="home">Home</a>
-            </li>
-            <li>
-                <a routerLink="public">Public</a>
-            </li>
-            <li *ngIf="!user" class="auth">
-                <a routerLink="signup"> Sign Up</a>
-            </li>
-            <li *ngIf="!user" class="auth">
-                <a routerLink="login">Login</a>
-            </li> 
-            <li *ngIf="user" class="auth">
-                <a (click)="logout()">Logout</a>
-            </li>
-            <li *ngIf="user" class="auth">
-                <a routerLink="profile">{{ user.name }}</a> 
-            </li>
-            <li *ngIf="user" class="auth">
-                <img [src]="user.photo" class="profile-photo" routerLink="profile" />
-            </li> 
-        </ul>
 
-    </div>
-    <div class="title-group">
-        <p class="title">A journey of a thousand miles</p>
-        <p class="title">begins with single step</p>
-        <button class="btn btn-primary" *ngIf="user" routerLink="create-a-goal">Create</button>
-    </div>
+<div class="header">
+    <ul>
+        <li>
+            <a routerLink="home">Create A Goal</a>
+        </li>
+        <li>
+            <a routerLink="home">Home</a>
+        </li>
+        <li>
+            <a routerLink="public">Public</a>
+        </li>
+        <li *ngIf="!user" class="auth">
+            <a routerLink="signup"> Sign Up</a>
+        </li>
+        <li *ngIf="!user" class="auth">
+            <a routerLink="login">Login</a>
+        </li>
+        <li *ngIf="user" class="auth">
+            <a (click)="logout()">Logout</a>
+        </li>
+        <li *ngIf="user" class="auth">
+            <a routerLink="profile">{{ user.name }}</a>
+        </li>
+        <li *ngIf="user" class="auth">
+            <img [src]="user.photo" class="profile-photo" routerLink="profile" />
+        </li>
+        <li *ngIf="user" class="auth">
+            <button class="btn btn-primary" routerLink="create-a-goal">Create</button>
+        </li>
+    </ul>
+
 </div>
+
+
 
 <div>
     <router-outlet></router-outlet>

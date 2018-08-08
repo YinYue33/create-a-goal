@@ -8,7 +8,12 @@ exports.addTask = (req, res, next) => {
     req.body.creator = req.user._id;
     Task.insertMany([req.body], (err, result) => {
         if (err) next(err);
-        else res.status(200).send();
+        else {
+            Task.findById(result[0]._id, (err, task) => {
+                if(err) next(err);
+                else res.status(200).send(task); 
+            }); 
+        }
     });
 };
 

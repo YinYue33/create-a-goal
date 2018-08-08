@@ -46,7 +46,7 @@ export class GoalForumComponent implements OnInit {
       if(task){
         task.goal = this.goalID;
         this.api.post('/task', '/add', task).subscribe(res => {
-          this.tasks.push(task);
+          this.tasks.push(res);
         });
       } 
     });
