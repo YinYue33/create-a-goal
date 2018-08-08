@@ -1,35 +1,56 @@
+.header{
+    padding: 20px;  
+}
+
+.cover-picture{
+    background-image:url("../assets/hero-image.jpg");
+    height: 400px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.title{
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 25pt;
+} 
+
+.title-group{
+    padding: 80px;
+}
+
+.auth{
+    float: right;
+}
+
 ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
-    background-color: #333;
+    overflow: hidden; 
 }
 
 li {
-    float: left;
+    float: left; 
 }
 
+.profile-photo{
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    object-fit: cover; 
+}
 li a {
     display: block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-}
-
-/* Change the link color to #111 (black) on hover */
-li a:hover {
-    background-color: #111;
-}
+} 
 
 .center {
     margin: auto;  
     padding: 10px; 
     width: 80%;
-}
-
-img { 
-    width: 5%;
-    height: 5%;
-}
+} 

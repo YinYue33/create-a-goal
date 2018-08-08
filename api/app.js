@@ -19,11 +19,12 @@ app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 //app.use(cookieParser('Thespywhodumpedme'));
-app.use(bodyParser.urlencoded({limit: '5mb'}, { extended: false })) 
+app.use(bodyParser.urlencoded({limit: '5mb'}, { extended: false }));
 app.use(bodyParser.json({limit: '5mb'})); 
 
 var goalsRoute = require('./routes/goalsRoute');
 var userRoute = require('./routes/userRoute');
+var commonRoute = require('./routes/commonRoute');
 
 // required for passport
 
@@ -62,6 +63,7 @@ app.post('/api/login', (req, res, next) => {
 
 app.use('/api/goal', goalsRoute);
 app.use('/api/user', userRoute); 
+app.use('/api/common', commonRoute);
 
 app.get('/api/logout', function(req, res){
   req.logout();

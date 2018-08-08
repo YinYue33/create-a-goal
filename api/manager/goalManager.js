@@ -30,6 +30,7 @@ exports.getJoined = (req, res, nexr) => {
 }
 
 exports.delete = (req, res, next) => {
+    console.log(req.query.id);
     Goal.deleteOne({ '_id': req.query.id }, (err, result) => {
         if (err) next(err);
         res.status(200).send();

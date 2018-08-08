@@ -2,4 +2,7 @@
   Goal Forum
 </p>
 
+<ng-container *ngFor="let participant of participants">
+  <img [src]="participant.photo" alt="your image" />
+</ng-container>
 <router-outlet></router-outlet>
