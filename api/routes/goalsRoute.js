@@ -8,6 +8,7 @@ router.get('/get/all', goalsManager.getAll);
 router.use(auth.isLoggedIn); 
 router.get('/get/created', goalsManager.getCreated);
 router.get('/get/joined', goalsManager.getJoined);
+router.get('/get/one', goalsManager.getOne);
 
 router.post('/add', goalsManager.add);  
 router.post('/join', goalsManager.join);

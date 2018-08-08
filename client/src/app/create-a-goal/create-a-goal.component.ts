@@ -17,8 +17,8 @@ export class CreateAGoalComponent implements OnInit {
     this.createAGoalForm = new FormGroup({
       title: new FormControl(null, Validators.required),
       description: new FormControl(null),
-      startDate: new FormControl(),
-      endDate: new FormControl(),
+      startDate: new FormControl(null, Validators.required),
+      endDate: new FormControl(null, Validators.required),
       maxUser: new FormControl(null),
       entryCredit: new FormControl(null)
     });  
@@ -27,7 +27,7 @@ export class CreateAGoalComponent implements OnInit {
   ngOnInit() {
   }
 
-  onCreateAGoal(){ 
+  onCreateAGoal(){  
     this.api.post('/goal', '/add', this.createAGoalForm.value).subscribe(res => {
       this.router.navigate(['/home']);
     });

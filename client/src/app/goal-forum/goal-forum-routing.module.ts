@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { GoalForumComponent } from './goal-forum.component';
-import { GoalForumHomeComponent } from './goal-forum-home/goal-forum-home.component';
+ 
 import { GoalTaskComponent } from './goal-task/goal-task.component';
 
 
@@ -14,10 +14,6 @@ const goalForumRoutes: Routes = [
             {
                 path: ':id',
                 component: GoalTaskComponent
-            },
-            {
-                path: '',
-                component: GoalForumHomeComponent 
             } 
         ]
 

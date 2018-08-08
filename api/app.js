@@ -25,6 +25,8 @@ app.use(bodyParser.json({limit: '5mb'}));
 var goalsRoute = require('./routes/goalsRoute');
 var userRoute = require('./routes/userRoute');
 var commonRoute = require('./routes/commonRoute');
+var taskRoute = require('./routes/taskRoute');
+
 
 // required for passport
 
@@ -64,6 +66,7 @@ app.post('/api/login', (req, res, next) => {
 app.use('/api/goal', goalsRoute);
 app.use('/api/user', userRoute); 
 app.use('/api/common', commonRoute);
+app.use('/api/task', taskRoute);
 
 app.get('/api/logout', function(req, res){
   req.logout();

@@ -35,6 +35,10 @@ li {
     float: left; 
 }
 
+li a:hover {
+    color: grey;
+}
+
 .profile-photo{
     border-radius: 50%;
     width: 40px;

@@ -10,3 +10,7 @@ img{
     width: 40%; 
     margin-top: 5%;
 }
+
+.mat-form-field {
+    width: 100%
+}

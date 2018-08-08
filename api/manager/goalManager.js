@@ -1,5 +1,12 @@
 var Goal = require('../models/goal');
 
+exports.getOne = (req, res, next) => {
+    Goal.findById(req.query.id, (err, goal) => {
+        if (err) next(err);
+        else res.status(200).send(goal);
+    });
+};
+
 exports.add = (req, res, next) => {
     req.body.creator = req.user._id;
     Goal.insertMany([req.body], (err, result) => {
@@ -29,12 +36,11 @@ exports.getJoined = (req, res, nexr) => {
     })
 }
 
-exports.delete = (req, res, next) => {
-    console.log(req.query.id);
+exports.delete = (req, res, next) => { 
     Goal.deleteOne({ '_id': req.query.id }, (err, result) => {
         if (err) next(err);
         res.status(200).send();
-    })
+    });
 }
 
 exports.join = (req, res, next) => {

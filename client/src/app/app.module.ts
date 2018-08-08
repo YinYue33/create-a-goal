@@ -6,7 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component'; 
 import { HttpClientModule } from '@angular/common/http'; 
-import { MatFormFieldModule, MatInputModule, MatNativeDateModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatNativeDateModule, MatDialogModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateAGoalComponent } from './create-a-goal/create-a-goal.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -15,6 +15,7 @@ import { PublicComponent } from './public/public.component';
 import { ProfileComponent } from './profile/profile.component'; 
 import { AppRoutingModule } from './app-routing.module';
 import { GoalForumModule } from './goal-forum/goal-forum.module';
+
 
  
 @NgModule({
@@ -39,7 +40,8 @@ import { GoalForumModule } from './goal-forum/goal-forum.module';
     MatDatepickerModule,
     MatNativeDateModule,
     GoalForumModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
