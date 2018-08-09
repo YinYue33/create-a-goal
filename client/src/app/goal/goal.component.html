@@ -1,35 +1,10 @@
-<div (click)="detail()" class="card" style="width: 80%; margin: 20px">
-    <div class="card-header">
-        {{goal.title}}
-        <span style="float: right" *ngIf="loggedin">
-            <a *ngIf="isCreator" class="btn btn-danger" style="color: white" (click)="delete()" aria-label="Delete">
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
-            </a>
-
-            <a *ngIf="joined" class="btn btn-warning" style="color: white" (click)="quit()" aria-label="Quit">
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
-            </a>
-
-            <a *ngIf="!isCreator && !joined" class="btn btn-primary" style="color: white" (click)="join()" aria-label="Join">
-                <i class="fa fa-shopping-cart" aria-hidden="true"></i>
-            </a>
-        </span>
+ 
+    <div class="card" (click)="detail()">
+        <div class="header">
+            <h1>{{goal.title}} test test</h1>
+        </div>
+        <div class="container">
+            <p> {{goal.creator}}</p>
+            entry credits: {{goal.entryCredit}} {{goal.startDate | date}} - {{goal.endDate | date}}
+        </div>
     </div>
-    <div class="card-body">
-        <h5 class="card-title">Description</h5>
-        <p class="card-text">{{ goal.description }}</p>
-    </div>
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item">
-            <span class="fa fa-user fa-fw fa-2x"></span> created by: {{goal.creator}}</li>
-        <li class="list-group-item">{{goal.startDate}} </li>
-        <li class="list-group-item">{{goal.endDate}}</li>
-        <li class="list-group-item">{{goal.maxUser}}</li>
-        <li class="list-group-item">
-            <span class="fa fa-bitcoin fa-2x"></span> entry credits: {{goal.entryCredit}}</li>
-    </ul>
-
-    <ng-container *ngFor="let participant of goal.participants">
-        {{participant}}
-    </ng-container>
-</div>

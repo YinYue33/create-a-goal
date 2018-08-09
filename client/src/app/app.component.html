@@ -1,11 +1,8 @@
-<!--The content below is only a placeholder and can be replaced.-->
-
-
-
+<!--The content below is only a placeholder and can be replaced.--> 
 <div class="header">
     <ul>
         <li>
-            <a routerLink="home">Create A Goal</a>
+            <img src="../favicon.ico" class="logo" routerLink="home">  
         </li>
         <li>
             <a routerLink="home">Home</a>
@@ -28,8 +25,8 @@
         <li *ngIf="user" class="auth">
             <img [src]="user.photo" class="profile-photo" routerLink="profile" />
         </li>
-        <li *ngIf="user" class="auth">
-            <button class="btn btn-primary" routerLink="create-a-goal">Create</button>
+        <li *ngIf="user">
+            <a routerLink="create-a-goal" aria-hidden="true"><i class="fa fa-plus" aria-hidden="true"></i> Create</a>  
         </li>
     </ul>
 

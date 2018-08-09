@@ -1,3 +1,9 @@
+.logo{ 
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
 .header{
     padding: 20px;  
 } 
