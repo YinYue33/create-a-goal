@@ -1,0 +1,3 @@
+<div *ngFor="let task of tasks">
+      <a routerLink="{{task._id}}">{{task.title}}  {{task.startDate | date}} {{task.endDate | date}}</a> 
+</div>

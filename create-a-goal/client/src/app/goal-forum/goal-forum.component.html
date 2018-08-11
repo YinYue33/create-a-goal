@@ -1,0 +1,11 @@
+<p>
+  Goal Forum
+</p>
+
+<ng-container *ngFor="let participant of participants">
+  <img [src]="participant.photo || '../assets/default-profile.jpeg'" alt="your image" />
+</ng-container>
+
+<button (click)="createTask()">Create Task</button>
+<app-goal-forum-home [tasks]="tasks"></app-goal-forum-home>
+<router-outlet></router-outlet>

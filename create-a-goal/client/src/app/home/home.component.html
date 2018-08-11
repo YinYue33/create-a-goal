@@ -1,0 +1,23 @@
+<div class="home">
+    <div class="cover-picture">
+
+        <div class="title-group center">
+            <p class="title">Finish Your Goal Today</p>
+            <p class="subtitle">A journey of a thousand miles begins with single step</p>
+        </div>
+    </div>
+
+    <p class="title create">You Create</p>
+    <div class="row"> 
+        <div class="col-sm-4" *ngFor="let goal of createdGoals">
+            <app-goal [goal]="goal" [isCreator]="true" [loggedin]="true"></app-goal>
+        </div>
+    </div>
+
+    <p class="title">You Join</p>
+    <div class="row">
+        <div class="col-sm-4" *ngFor="let goal of joinedGoals">
+            <app-goal [goal]="goal" [isCreator]="false" [joined]="true" [loggedin]="true"></app-goal>
+        </div>
+    </div>
+</div>

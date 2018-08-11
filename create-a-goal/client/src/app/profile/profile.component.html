@@ -1,0 +1,30 @@
+<ng-container *ngIf="user">
+  <img id="" [src]="user.photo" alt="your image" />
+  <input type="file" (change)="onFileChange($event)">
+
+
+  <div class="container centered">
+    <div>
+      <h1>
+        <span class="fa fa-sign-in"></span> {{ user.name }} </h1>
+      <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+        <mat-form-field appearance="outline">
+          <mat-label>Username</mat-label>
+          <input type="text" matInput formControlName="name" required>
+          <mat-error>username can't be empty</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input type="email" matInput formControlName="email" required>
+          <mat-error>email can't be empty!</mat-error>
+        </mat-form-field>
+
+        <button class="btn btn-danger btn-lg" mat-button type="submit" [disabled]="!profileForm.valid || loading">Submit
+          <i class="fa fa-spinner fa-spin fa-fw" *ngIf="loading"></i>
+        </button>
+      </form>
+
+    </div>
+  </div>
+</ng-container>
