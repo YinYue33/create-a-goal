@@ -13,4 +13,17 @@ img{
 .action{
     margin: 10px
 }
+
+.task-title{
+    display: inline;
+    margin-right: 50px;
+}
+
+.create-task{
+    float: right
+}
+
+.task-home{
+    margin-top: 30px;
+}
  

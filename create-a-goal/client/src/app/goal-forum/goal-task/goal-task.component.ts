@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
  
 
@@ -16,6 +16,8 @@ export class GoalTaskComponent implements OnInit {
   taskID: any;
   task$: any;
   comments: Comment[] = [];
+  @ViewChild('comment') newComment: ElementRef;
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -42,12 +44,13 @@ export class GoalTaskComponent implements OnInit {
          this.comments.push(comment);
          this.comments.sort((a, b) => b.createdTime - a.createdTime);
     });
+    this.newComment.nativeElement.value = '';
   }
 
   deleteComment(comment) {
     this.api.delete('/task','/delete/comment', {id : comment._id}).subscribe(res => {
         this.comments = this.comments.filter(com => com._id !== comment._id);
     });
-  }
+  } 
 
 }

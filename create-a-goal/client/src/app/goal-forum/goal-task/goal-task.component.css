@@ -9,3 +9,6 @@ img{
     object-fit: cover;
     margin: 10px;
 }
+.right{
+    float: right;
+}

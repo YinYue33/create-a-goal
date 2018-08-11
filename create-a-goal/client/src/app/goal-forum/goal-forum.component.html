@@ -57,9 +57,16 @@
         ullamco.
       </p>
       <br>
-      <h2>Tasks</h2>
-      <button class="btn btn-primary" (click)="createTask()">Create Task</button>
-      <app-goal-forum-home [tasks]="tasks"></app-goal-forum-home>
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title task-title">Task</h2>
+          <button class="btn btn-primary create-task" (click)="createTask()">Create Task</button>
+          <div class="task-home">
+            <app-goal-forum-home [tasks]="tasks"></app-goal-forum-home>
+          </div>
+        </div>
+      </div>
+
       <router-outlet></router-outlet>
     </div>
   </div>
