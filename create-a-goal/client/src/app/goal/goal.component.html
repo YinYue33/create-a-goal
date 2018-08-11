@@ -1,10 +1,7 @@
- 
-    <div class="card" (click)="detail()">
-        <div class="header">
-            <h1>{{goal.title}} test test</h1>
-        </div>
-        <div class="container">
-            <p> {{goal.creator}}</p>
-            entry credits: {{goal.entryCredit}} {{goal.startDate | date}} - {{goal.endDate | date}}
-        </div>
+ <div [class.enter] = "enter" class="card" (click)="detail()">
+    <div class="card-body">
+        <i class="fa fa-circle" [style.color]="getColor()"></i> <h4 class="card-title">{{goal.title}}</h4>
+        <p class="card-text">{{goal.description}}</p> 
     </div>
+    <div class="card-footer">{{goal.startDate | date: 'M/d/yy'}} - {{goal.endDate | date: 'M/d/yy'}}   <i class="fa fa-usd" style="color:#f7e85d"></i>{{goal.entryCredit}}</div> 
+</div>

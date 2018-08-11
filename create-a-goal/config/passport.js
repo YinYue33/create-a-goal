@@ -51,8 +51,7 @@ module.exports = function (passport) {
                 return done(null, false, req.flash('error', 'All fields required'));
             }
             //can user either email or username to login
-            User.findOne({ $or: [ { 'email': username }, { 'name': username } ] }, (err, user) => {
-                console.log(user);
+            User.findOne({ $or: [ { 'email': username }, { 'name': username } ] }, (err, user) => { 
                 if(err) return done(err); 
                 if(!user) return done(null, false, req.flash('error', 'username not exist'));
                 if(!user.validPassword(password)){

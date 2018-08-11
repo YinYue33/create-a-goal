@@ -32,9 +32,9 @@ app.use(passport.initialize());
 app.use(passport.session());  
   
 //default
-// app.get('/', (req, res, next) => {
-//   res.render('index', {login: req.user? 'true' : 'false'});
-// }) 
+app.get('/', (req, res, next) => {
+  res.render('index', {userID: req.user? req.user._id : null});
+}) 
 
 //static files
 app.use(express.static(path.join(__dirname, 'public'))); 
@@ -76,9 +76,9 @@ app.use('/api/user', userRoute);
 app.use('/api/common', commonRoute);
 app.use('/api/task', taskRoute); 
 
-// app.use((req, res, next) => { 
-//   res.render('index', {login: req.user? 'true' : 'false'});
-// })
+app.use((req, res, next) => {  
+  res.render('index', {userID: req.user? req.user._id : null});
+})
  
 app.use(function(req, res, next) {
   next(createError(404));

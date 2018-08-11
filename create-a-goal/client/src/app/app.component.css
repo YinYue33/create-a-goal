@@ -46,4 +46,10 @@ li a {
     margin: auto;  
     padding: 10px; 
     width: 80%;
-} 
+}  
+
+footer{
+	height: 50px;
+	margin-top: 20px;
+	padding: 20px
+}

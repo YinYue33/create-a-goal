@@ -1,11 +1,11 @@
-<ng-container *ngIf="user">
-    login
-    <app-goal *ngFor="let goal of goals" [loggedin] = "true" [goal]="goal" [isCreator]="goal.creator == user._id" [joined] = "joined(goal)">
-    </app-goal>
-</ng-container>
-
-<ng-container *ngIf="user === null">
-    not login
-    <app-goal *ngFor="let goal of goals" [goal]="goal" [loggedin]="false">
-    </app-goal>
-</ng-container>
+<div class="jumbotron text-center">
+    <h1>Explore what others are working on</h1>
+    <p>A journey of a thousand miles begins with single step</p>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-4" *ngFor="let goal of goals">
+            <app-goal [goal]="goal"></app-goal>
+        </div> 
+    </div>
+</div>

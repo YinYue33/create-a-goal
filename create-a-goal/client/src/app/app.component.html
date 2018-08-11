@@ -5,7 +5,7 @@
             <img src="../favicon.ico" class="logo" routerLink="home">  
         </li>
         <li>
-            <a routerLink="home">Home</a>
+            <a *ngIf="user"routerLink="home">Home</a>
         </li>
         <li>
             <a routerLink="public">Public</a>
@@ -37,3 +37,7 @@
 <div>
     <router-outlet></router-outlet>
 </div>
+
+<footer class="text-center">
+        <p>Company Name &copy; 2018</p>
+</footer> 

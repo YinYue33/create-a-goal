@@ -13,25 +13,16 @@ import { AuthService } from '../services/auth.service';
 export class PublicComponent implements OnInit {
 
   goals: Goal[];
-  user: User; 
-  _userSubscription: any;
+  user: User;  
   constructor(private api: ApiService,
     private router: Router,
-  private auth: AuthService) {  
+    private auth: AuthService) {  
     this.user = auth.user;
-    this._userSubscription = this.auth.userChange.subscribe(user => {
-      this.user = user;
-    });
   }
 
   ngOnInit() {
     this.api.get('/goal', '/get/all', {}).subscribe(res => {
       this.goals = res; 
     })
-  }
-
-  joined(goal: Goal): boolean{
-    if(this.user === null) return false;
-    return goal.participants.indexOf(this.user._id) !== -1;
-  }
+  } 
 }

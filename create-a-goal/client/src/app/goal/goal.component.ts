@@ -1,4 +1,5 @@
-import { Component, OnInit , Input} from '@angular/core';
+import { Component, OnInit , Input, HostListener} from '@angular/core';
+import { AuthService } from '../services/auth.service';
 import { Goal } from '../models/goal.model';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
@@ -11,19 +12,38 @@ import { Router } from '@angular/router';
 export class GoalComponent implements OnInit {
 
   @Input()goal: Goal;
-  @Input()isCreator: boolean;
-  @Input()joined: boolean;
-  @Input()loggedin: boolean;
 
-  constructor(private api: ApiService, private router: Router) { }
+  
+  enter: boolean = false;
+
+  constructor(private api: ApiService, 
+    private router: Router,
+  private auth: AuthService) { }
 
   ngOnInit() {
+  } 
+
+  getColor(){
+    if(this.auth.userID == this.goal.creator){
+        return 'red';
+    }else if (this.goal.participants.indexOf(this.auth.userID) !== -1){
+      return 'blue';
+    }else{
+      return 'green';
+    }
+  }
+
+  @HostListener('mouseenter') mouseEnter() {
+    this.enter = true;
+  }
+
+  @HostListener('mouseleave') onMouseLeave() {
+    this.enter = false;
   }
 
   join() {
       this.api.post('/goal', '/join', {goalID: this.goal._id}).subscribe(res => {
-        this.goal = res; 
-        this.joined = true;
+        this.goal = res;  
       })
   }
 
@@ -35,8 +55,7 @@ export class GoalComponent implements OnInit {
 
   quit(){
     this.api.post('/goal', '/quit', {goalID: this.goal._id}).subscribe(res => {
-        this.goal = res;
-        this.joined = false;
+        this.goal = res; 
     })
   }
 

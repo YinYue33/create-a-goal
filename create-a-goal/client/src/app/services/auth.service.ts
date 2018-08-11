@@ -11,10 +11,12 @@ export class AuthService {
 
   userChange: Subject<User>;
   user: User;
+  userID: any;
 
   constructor(private api: ApiService, private router: Router) {
     this.userChange = new Subject<User>();
     this.api.get('', '/sessionUser', {}).subscribe(user => {
+      if(user) this.userID = user._id;
       this.user = user;
       this.userChange.next(this.user);
     });
@@ -32,6 +34,7 @@ export class AuthService {
       res => {
         this.user = null;
         this.userChange.next(null);
+        this.userID = null;
         this.router.navigate(['/login']);
       }
     );
@@ -39,7 +42,7 @@ export class AuthService {
 
   signup(signupInfo) {
     this.api.post('', '/signup', signupInfo).subscribe(user => {
-      console.log(user);
+      this.userID = user._id; 
       this.user = user;
       this.userChange.next(user);
       this.router.navigate(['/home']);
@@ -47,8 +50,8 @@ export class AuthService {
   };
 
   login(loginInfo) {
-    this.api.post('', '/login', { username: loginInfo.username, password: loginInfo.password }).subscribe(user => {
-      console.log(user);
+    this.api.post('', '/login', { username: loginInfo.username, password: loginInfo.password }).subscribe(user => { 
+      this.userID = user._id; 
       this.user = user;
       this.userChange.next(user);
       this.router.navigate(['/home']);

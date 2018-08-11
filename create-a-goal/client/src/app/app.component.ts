@@ -11,18 +11,20 @@ import { User } from './models/user.model';
 export class AppComponent implements OnInit {
 
   user: User;
-  _userSubscription: any; 
+  _userSubscription: any;  
 
   constructor(public api: ApiService,
     public auth: AuthService,
-    private router: Router,
-    public elementRef: ElementRef) { 
-    this.user = JSON.parse(this.elementRef.nativeElement.getAttribute('login'));
-    this.auth.user = this.user;
-    console.log(this.user);
+    public router: Router,
+    public elementRef: ElementRef) {   
+    this.auth.userID = this.elementRef.nativeElement.getAttribute('userID'); 
+    this.user = this.auth.user;
     this._userSubscription = this.auth.userChange.subscribe(user => {
       this.user = user;
-    });
+    }); 
+    if(!this.auth.userID){ 
+      //this.router.navigate(['/login']);
+    }
   }
 
   ngOnInit(){ 
@@ -30,6 +32,5 @@ export class AppComponent implements OnInit {
 
   logout() { 
     this.auth.logout();
-    this.router.navigate(['/login']);
   }
 }

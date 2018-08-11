@@ -2,37 +2,13 @@
     margin: auto;
     width: 100%; 
     padding: 10px;
-}
-
-.title-group{
-    padding: 50px;
 } 
 
-.title{
-    color: #76c8e8;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: 100;
-    font-size: 30pt;
-    text-align: center;
+.jumbotron{
+    height: 300px
 }  
-
-.subtitle{
-    font-family: "Courier New", Courier, monospace;
-    font-weight: 20;
-    text-align: center;
-    font-size: 20pt;
+ 
+.col-sm-4{
+    padding: 20px;
 }
-
-.cover-picture{ 
-    height: 300px;
-    width: 100%;
-    overflow: hidden;
-} 
-
-.row{
-    padding: 50px;
-}
-
-.create{
-    color: #ff4d4d;
-}
+ 

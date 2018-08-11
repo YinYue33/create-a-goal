@@ -102,7 +102,7 @@ module.exports = ".logo{ \n    width: 40px;\n    height: 40px;\n    -o-object-fi
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.--> \n<div class=\"header\">\n    <ul>\n        <li>\n            <img src=\"../favicon.ico\" class=\"logo\" routerLink=\"home\">  \n        </li>\n        <li>\n            <a routerLink=\"home\">Home</a>\n        </li>\n        <li>\n            <a routerLink=\"public\">Public</a>\n        </li>\n        <li *ngIf=\"!user\" class=\"auth\">\n            <a routerLink=\"signup\"> Sign Up</a>\n        </li>\n        <li *ngIf=\"!user\" class=\"auth\">\n            <a routerLink=\"login\">Login</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <a (click)=\"logout()\">Logout</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <a routerLink=\"profile\">{{ user.name }}</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <img [src]=\"user.photo\" class=\"profile-photo\" routerLink=\"profile\" />\n        </li>\n        <li *ngIf=\"user\">\n            <a routerLink=\"create-a-goal\" aria-hidden=\"true\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i> Create</a>  \n        </li>\n    </ul>\n\n</div>\n\n\n\n<div>\n    <router-outlet></router-outlet>\n</div>"
+module.exports = "<!--The content below is only a placeholder and can be replaced.--> \n<div class=\"header\">\n    <ul>\n        <li>\n            <img src=\"../favicon.ico\" class=\"logo\" routerLink=\"home\">  \n        </li>\n        <li>\n            <a *ngIf=\"user\"routerLink=\"home\">Home</a>\n        </li>\n        <li>\n            <a routerLink=\"public\">Public</a>\n        </li>\n        <li *ngIf=\"!user\" class=\"auth\">\n            <a routerLink=\"signup\"> Sign Up</a>\n        </li>\n        <li *ngIf=\"!user\" class=\"auth\">\n            <a routerLink=\"login\">Login</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <a (click)=\"logout()\">Logout</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <a routerLink=\"profile\">{{ user.name }}</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <img [src]=\"user.photo\" class=\"profile-photo\" routerLink=\"profile\" />\n        </li>\n        <li *ngIf=\"user\">\n            <a routerLink=\"create-a-goal\" aria-hidden=\"true\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i> Create</a>  \n        </li>\n    </ul>\n\n</div>\n\n\n\n<div>\n    <router-outlet></router-outlet>\n</div>"
 
 /***/ }),
 
@@ -140,18 +140,19 @@ var AppComponent = /** @class */ (function () {
         this.auth = auth;
         this.router = router;
         this.elementRef = elementRef;
-        this.user = JSON.parse(this.elementRef.nativeElement.getAttribute('login'));
-        this.auth.user = this.user;
-        console.log(this.user);
+        this.auth.userID = this.elementRef.nativeElement.getAttribute('userID');
+        this.user = this.auth.user;
         this._userSubscription = this.auth.userChange.subscribe(function (user) {
             _this.user = user;
         });
+        if (!this.auth.userID) {
+            //this.router.navigate(['/login']);
+        }
     }
     AppComponent.prototype.ngOnInit = function () {
     };
     AppComponent.prototype.logout = function () {
         this.auth.logout();
-        this.router.navigate(['/login']);
     };
     AppComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -843,7 +844,7 @@ var GoalTaskComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "div.card {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n    text-align: center;\n    height: 300px; \n  }\n  \n  div.header {\n      background-color: #ff3333;\n      color: white;\n      padding: 10px;\n      font-size: 40px;\n  }\n  \n  div.container {\n      padding: 10px;\n  }"
+module.exports = "div.card {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n    text-align: center; \n}\n.enter{\n   border-color: #3e82ef;  \n}\n.card-text{ \n    height: 150px;\n    overflow: hidden;\n}\n\n "
 
 /***/ }),
 
@@ -854,7 +855,7 @@ module.exports = "div.card {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " \n    <div class=\"card\" (click)=\"detail()\">\n        <div class=\"header\">\n            <h1>{{goal.title}} test test</h1>\n        </div>\n        <div class=\"container\">\n            <p> {{goal.creator}}</p>\n            entry credits: {{goal.entryCredit}} {{goal.startDate | date}} - {{goal.endDate | date}}\n        </div>\n    </div>"
+module.exports = " <div [class.enter] = \"enter\" class=\"card\" (click)=\"detail()\">\n    <div class=\"card-body\">\n        <i class=\"fa fa-circle\" [style.color]=\"\"></i> <h4 class=\"card-title\">{{goal.title}}</h4>\n        <p class=\"card-text\">{{goal.description}}</p> \n    </div>\n    <div class=\"card-footer\">{{goal.startDate | date: 'M/d/yy'}} - {{goal.endDate | date: 'M/d/yy'}}   <i class=\"fa fa-usd\" style=\"color:#f7e85d\"></i>{{goal.entryCredit}}</div> \n</div>"
 
 /***/ }),
 
@@ -869,8 +870,9 @@ module.exports = " \n    <div class=\"card\" (click)=\"detail()\">\n        <div
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoalComponent", function() { return GoalComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -883,18 +885,26 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var GoalComponent = /** @class */ (function () {
-    function GoalComponent(api, router) {
+    function GoalComponent(api, router, auth) {
         this.api = api;
         this.router = router;
+        this.auth = auth;
+        this.enter = false;
     }
     GoalComponent.prototype.ngOnInit = function () {
+    };
+    GoalComponent.prototype.mouseEnter = function () {
+        this.enter = true;
+    };
+    GoalComponent.prototype.onMouseLeave = function () {
+        this.enter = false;
     };
     GoalComponent.prototype.join = function () {
         var _this = this;
         this.api.post('/goal', '/join', { goalID: this.goal._id }).subscribe(function (res) {
             _this.goal = res;
-            _this.joined = true;
         });
     };
     GoalComponent.prototype.delete = function () {
@@ -905,7 +915,6 @@ var GoalComponent = /** @class */ (function () {
         var _this = this;
         this.api.post('/goal', '/quit', { goalID: this.goal._id }).subscribe(function (res) {
             _this.goal = res;
-            _this.joined = false;
         });
     };
     GoalComponent.prototype.detail = function () {
@@ -916,24 +925,26 @@ var GoalComponent = /** @class */ (function () {
         __metadata("design:type", Object)
     ], GoalComponent.prototype, "goal", void 0);
     __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Boolean)
-    ], GoalComponent.prototype, "isCreator", void 0);
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"])('mouseenter'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], GoalComponent.prototype, "mouseEnter", null);
     __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Boolean)
-    ], GoalComponent.prototype, "joined", void 0);
-    __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
-        __metadata("design:type", Boolean)
-    ], GoalComponent.prototype, "loggedin", void 0);
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"])('mouseleave'),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], GoalComponent.prototype, "onMouseLeave", null);
     GoalComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-goal',
             template: __webpack_require__(/*! ./goal.component.html */ "./src/app/goal/goal.component.html"),
             styles: [__webpack_require__(/*! ./goal.component.css */ "./src/app/goal/goal.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_1__["AuthService"]])
     ], GoalComponent);
     return GoalComponent;
 }());
@@ -949,7 +960,7 @@ var GoalComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".center {\n    margin: auto;\n    width: 100%; \n    padding: 10px;\n}\n\n.title-group{\n    padding: 50px;\n}\n\n.title{\n    color: #76c8e8;\n    font-family: Arial, Helvetica, sans-serif;\n    font-weight: 100;\n    font-size: 30pt;\n    text-align: center;\n}\n\n.subtitle{\n    font-family: \"Courier New\", Courier, monospace;\n    font-weight: 20;\n    text-align: center;\n    font-size: 20pt;\n}\n\n.cover-picture{ \n    height: 300px;\n    width: 100%;\n    overflow: hidden;\n}\n\n.row{\n    padding: 50px;\n}\n\n.create{\n    color: #ff4d4d;\n}\n"
+module.exports = ".center {\n    margin: auto;\n    width: 100%; \n    padding: 10px;\n} \n\n.jumbotron{\n    height: 300px\n} \n\n.col-sm-4{\n    padding: 20px;\n}\n \n"
 
 /***/ }),
 
@@ -960,7 +971,7 @@ module.exports = ".center {\n    margin: auto;\n    width: 100%; \n    padding: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"home\">\n    <div class=\"cover-picture\">\n\n        <div class=\"title-group center\">\n            <p class=\"title\">Finish Your Goal Today</p>\n            <p class=\"subtitle\">A journey of a thousand miles begins with single step</p>\n        </div>\n    </div>\n\n    <p class=\"title create\">You Create</p>\n    <div class=\"row\"> \n        <div class=\"col-sm-4\" *ngFor=\"let goal of createdGoals\">\n            <app-goal [goal]=\"goal\" [isCreator]=\"true\" [loggedin]=\"true\"></app-goal>\n        </div>\n    </div>\n\n    <p class=\"title\">You Join</p>\n    <div class=\"row\">\n        <div class=\"col-sm-4\" *ngFor=\"let goal of joinedGoals\">\n            <app-goal [goal]=\"goal\" [isCreator]=\"false\" [joined]=\"true\" [loggedin]=\"true\"></app-goal>\n        </div>\n    </div>\n</div>"
+module.exports = "<div class=\"home\">\n    <div class=\"jumbotron text-center\">\n        <h1>Finish Your Goal Today</h1>\n        <p>A journey of a thousand miles begins with single step</p>\n    </div>\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-sm-4\" *ngFor=\"let goal of createdGoals\">\n                <app-goal [goal]=\"goal\"></app-goal>\n            </div>\n            <div class=\"col-sm-4\" *ngFor=\"let goal of joinedGoals\">\n                <app-goal [goal]=\"goal\"></app-goal>\n            </div> \n        </div>\n    </div> \n     \n</div>"
 
 /***/ }),
 
@@ -976,7 +987,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -988,27 +998,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 };
 
 
-
 var HomeComponent = /** @class */ (function () {
-    function HomeComponent(api, router) {
-        var _this = this;
+    function HomeComponent(api) {
         this.api = api;
-        this.router = router;
-        this.api.get('', '/isLoggedIn', {}).subscribe(function (user) {
-            if (user === null) {
-                _this.router.navigate(['/login']);
-            }
-            else {
-                _this.api.get('/goal', '/get/created', {}).subscribe(function (res) {
-                    _this.createdGoals = res;
-                });
-                _this.api.get('/goal', '/get/joined', {}).subscribe(function (res) {
-                    _this.joinedGoals = res;
-                });
-            }
-        });
     }
     HomeComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.api.get('/goal', '/get/created', {}).subscribe(function (res) {
+            _this.createdGoals = res;
+        });
+        this.api.get('/goal', '/get/joined', {}).subscribe(function (res) {
+            _this.joinedGoals = res;
+        });
     };
     HomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1016,8 +1017,7 @@ var HomeComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./home.component.html */ "./src/app/home/home.component.html"),
             styles: [__webpack_require__(/*! ./home.component.css */ "./src/app/home/home.component.css")]
         }),
-        __metadata("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]])
+        __metadata("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"]])
     ], HomeComponent);
     return HomeComponent;
 }());
@@ -1235,7 +1235,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ng-container *ngIf=\"user\">\n    login\n    <app-goal *ngFor=\"let goal of goals\" [loggedin] = \"true\" [goal]=\"goal\" [isCreator]=\"goal.creator == user._id\" [joined] = \"joined(goal)\">\n    </app-goal>\n</ng-container>\n\n<ng-container *ngIf=\"user === null\">\n    not login\n    <app-goal *ngFor=\"let goal of goals\" [goal]=\"goal\" [loggedin]=\"false\">\n    </app-goal>\n</ng-container>"
+module.exports = "<ng-container *ngIf=\"auth.isLogin\">\n    login\n    <app-goal *ngFor=\"let goal of goals\" [goal]=\"goal\">\n    </app-goal>\n</ng-container>\n\n<ng-container *ngIf=\"!auth.isLogin\">\n    not login\n    <app-goal *ngFor=\"let goal of goals\" [goal]=\"goal\">\n    </app-goal>\n</ng-container>"
 
 /***/ }),
 
@@ -1268,25 +1268,16 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 var PublicComponent = /** @class */ (function () {
     function PublicComponent(api, router, auth) {
-        var _this = this;
         this.api = api;
         this.router = router;
         this.auth = auth;
         this.user = auth.user;
-        this._userSubscription = this.auth.userChange.subscribe(function (user) {
-            _this.user = user;
-        });
     }
     PublicComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.api.get('/goal', '/get/all', {}).subscribe(function (res) {
             _this.goals = res;
         });
-    };
-    PublicComponent.prototype.joined = function (goal) {
-        if (this.user === null)
-            return false;
-        return goal.participants.indexOf(this.user._id) !== -1;
     };
     PublicComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1415,6 +1406,8 @@ var AuthService = /** @class */ (function () {
         this.router = router;
         this.userChange = new rxjs__WEBPACK_IMPORTED_MODULE_1__["Subject"]();
         this.api.get('', '/sessionUser', {}).subscribe(function (user) {
+            if (user)
+                _this.userID = user._id;
             _this.user = user;
             _this.userChange.next(_this.user);
         });
@@ -1431,6 +1424,7 @@ var AuthService = /** @class */ (function () {
         this.api.get('', '/logout', {}).subscribe(function (res) {
             _this.user = null;
             _this.userChange.next(null);
+            _this.userID = null;
             _this.router.navigate(['/login']);
         });
     };
@@ -1438,6 +1432,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.signup = function (signupInfo) {
         var _this = this;
         this.api.post('', '/signup', signupInfo).subscribe(function (user) {
+            _this.userID = user._id;
             _this.user = user;
             _this.userChange.next(user);
             _this.router.navigate(['/home']);
@@ -1447,6 +1442,7 @@ var AuthService = /** @class */ (function () {
     AuthService.prototype.login = function (loginInfo) {
         var _this = this;
         this.api.post('', '/login', { username: loginInfo.username, password: loginInfo.password }).subscribe(function (user) {
+            _this.userID = user._id;
             _this.user = user;
             _this.userChange.next(user);
             _this.router.navigate(['/home']);

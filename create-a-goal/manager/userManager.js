@@ -1,7 +1,7 @@
 var User = require('../models/user')
 
 exports.putUser = (req, res, next) => { 
-    User.findById(req.user._id, (err, user) => { 
+    User.findById(req.user._id, {hash: 0, salt: 0}, (err, user) => { 
         user.name = req.body.name || user.name;
         user.email = req.body.email || user.email; 
         user.photo = req.body.photo || user.photo;  
