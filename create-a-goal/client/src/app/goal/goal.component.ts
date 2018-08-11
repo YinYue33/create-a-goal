@@ -39,25 +39,7 @@ export class GoalComponent implements OnInit {
 
   @HostListener('mouseleave') onMouseLeave() {
     this.enter = false;
-  }
-
-  join() {
-      this.api.post('/goal', '/join', {goalID: this.goal._id}).subscribe(res => {
-        this.goal = res;  
-      })
-  }
-
-  delete() {
-      this.api.delete('/goal', '/delete', {id: this.goal._id}).subscribe(res => {
-         
-      })
-  }
-
-  quit(){
-    this.api.post('/goal', '/quit', {goalID: this.goal._id}).subscribe(res => {
-        this.goal = res; 
-    })
-  }
+  } 
 
   detail(){
     this.router.navigate(['/forum', this.goal._id]);
