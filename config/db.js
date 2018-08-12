@@ -1,8 +1,6 @@
-var mongoose = require('mongoose');
-var environment = require('./environment');
+var mongoose = require('mongoose'); 
 var gracefulShutdown;
-var dbURI = 'mongodb://localhost/createAGoal';
-//var dbURI = environment.db.uri;
+var dbURI = 'mongodb://localhost/createAGoal'; 
 
 if (process.env.NODE_ENV === 'production') {
   dbURI = process.env.MONGOLAB_URI;

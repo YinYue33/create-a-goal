@@ -15,7 +15,7 @@ var taskRoute = require('./routes/taskRoute');
 var sessionSecret;
 
 if (process.env.NODE_ENV === 'production') {
-  session = process.env.SESSION_SECRET;
+  sessionSecret = process.env.SESSION_SECRET;
 }else{
   sessionSecret = require('./config/environment').sessionSecret;
 }
