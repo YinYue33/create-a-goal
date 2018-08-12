@@ -1,6 +1,8 @@
 # Created by https://www.gitignore.io/api/node,angular,visualstudiocode
 
-/client
+client/
+
+environment.js
 ### Angular ###
 ## Angular ##
 # compiled output
