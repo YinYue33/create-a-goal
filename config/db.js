@@ -1,10 +1,6 @@
 var mongoose = require('mongoose'); 
 var gracefulShutdown;
 var dbURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/createAGoal'; 
-
- 
-  //dbURI = process.env.MONGODB_URI;
-  //dbURI = 'mongodb://create-a-goal:kaZFV9Hrwb6hOFS6iFMv5WoNNQoHsHl5QDgOGaMNpcDhSdDpZygRoAlXxrPdMvrbxuZXfovJjCOHssaGzgYIRw==@create-a-goal.documents.azure.com:10250/mean?ssl=true&sslverifycertificate=false'
 mongoose.connect(dbURI, { useNewUrlParser: true });  
 
 // CONNECTION EVENTS

@@ -18,11 +18,11 @@ require('./config/passport')(passport);
 require('./config/db'); 
 
 var app = express(); 
-// var corsOptions = {
-//   origin: 'http://localhost:4200',
-//   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-// };
-// app.use(cors(corsOptions));
+var corsOptions = {
+  origin: 'http://localhost:4200',
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 app.set('view engine', 'pug') 
 app.use(logger('dev')); 
 app.use(bodyParser.urlencoded({limit: '5mb'}, { extended: false })); //limit is for profile photo
