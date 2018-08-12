@@ -3,8 +3,8 @@ var gracefulShutdown;
 var dbURI = 'mongodb://localhost/createAGoal'; 
 
 if (process.env.NODE_ENV === 'production') {
-  dbURI = 'mongodb://create-a-goal:kaZFV9Hrwb6hOFS6iFMv5WoNNQoHsHl5QDgOGaMNpcDhSdDpZygRoAlXxrPdMvrbxuZXfovJjCOHssaGzgYIRw==@create-a-goal.documents.azure.com:10250/mean?ssl=true&sslverifycertificate=false'
-  //dbURI = process.env.MONGOLAB_URI;
+  //dbURI = 'mongodb://create-a-goal:kaZFV9Hrwb6hOFS6iFMv5WoNNQoHsHl5QDgOGaMNpcDhSdDpZygRoAlXxrPdMvrbxuZXfovJjCOHssaGzgYIRw==@create-a-goal.documents.azure.com:10250/mean?ssl=true&sslverifycertificate=false'
+  dbURI = process.env.MONGOLAB_URI;
   mongoose.connect(dbURI, { useNewUrlParser: true }); 
 }else{
   mongoose.connect(dbURI);
