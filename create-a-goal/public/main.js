@@ -91,7 +91,7 @@ var AppRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".logo{ \n    width: 40px;\n    height: 40px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n\n.header{\n    padding: 20px;  \n}\n\n.auth{\n    float: right;\n}\n\nul {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n    overflow: hidden; \n}\n\nli {\n    float: left; \n}\n\nli a:hover {\n    color: grey;\n}\n\n.profile-photo{\n    border-radius: 50%;\n    width: 40px;\n    height: 40px;\n    -o-object-fit: cover;\n       object-fit: cover; \n}\n\nli a {\n    display: block;\n    color: black;\n    text-align: center;\n    padding: 14px 16px;\n    text-decoration: none;\n}\n\n.center {\n    margin: auto;  \n    padding: 10px; \n    width: 80%;\n} "
+module.exports = ".logo{ \n    width: 40px;\n    height: 40px;\n    -o-object-fit: cover;\n       object-fit: cover;\n}\n\n.header{\n    padding: 20px;  \n}\n\n.auth{\n    float: right;\n}\n\nul {\n    list-style-type: none;\n    margin: 0;\n    padding: 0;\n    overflow: hidden; \n}\n\nli {\n    float: left; \n}\n\nli a:hover {\n    color: grey;\n}\n\n.profile-photo{\n    border-radius: 50%;\n    width: 40px;\n    height: 40px;\n    -o-object-fit: cover;\n       object-fit: cover; \n}\n\nli a {\n    display: block;\n    color: black;\n    text-align: center;\n    padding: 14px 16px;\n    text-decoration: none;\n}\n\n.center {\n    margin: auto;  \n    padding: 10px; \n    width: 80%;\n}\n\nfooter{\n\theight: 50px;\n\tmargin-top: 20px;\n\tpadding: 20px\n}"
 
 /***/ }),
 
@@ -102,7 +102,7 @@ module.exports = ".logo{ \n    width: 40px;\n    height: 40px;\n    -o-object-fi
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.--> \n<div class=\"header\">\n    <ul>\n        <li>\n            <img src=\"../favicon.ico\" class=\"logo\" routerLink=\"home\">  \n        </li>\n        <li>\n            <a *ngIf=\"user\"routerLink=\"home\">Home</a>\n        </li>\n        <li>\n            <a routerLink=\"public\">Public</a>\n        </li>\n        <li *ngIf=\"!user\" class=\"auth\">\n            <a routerLink=\"signup\"> Sign Up</a>\n        </li>\n        <li *ngIf=\"!user\" class=\"auth\">\n            <a routerLink=\"login\">Login</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <a (click)=\"logout()\">Logout</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <a routerLink=\"profile\">{{ user.name }}</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <img [src]=\"user.photo\" class=\"profile-photo\" routerLink=\"profile\" />\n        </li>\n        <li *ngIf=\"user\">\n            <a routerLink=\"create-a-goal\" aria-hidden=\"true\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i> Create</a>  \n        </li>\n    </ul>\n\n</div>\n\n\n\n<div>\n    <router-outlet></router-outlet>\n</div>"
+module.exports = "<!--The content below is only a placeholder and can be replaced.--> \n<div class=\"header\">\n    <ul>\n        <li>\n            <img src=\"../favicon.ico\" class=\"logo\" routerLink=\"home\">  \n        </li>\n        <li>\n            <a *ngIf=\"user\"routerLink=\"home\">Home</a>\n        </li>\n        <li>\n            <a routerLink=\"public\">Public</a>\n        </li>\n        <li *ngIf=\"!user\" class=\"auth\">\n            <a routerLink=\"signup\"> Sign Up</a>\n        </li>\n        <li *ngIf=\"!user\" class=\"auth\">\n            <a routerLink=\"login\">Login</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <a (click)=\"logout()\">Logout</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <a routerLink=\"profile\">{{ user.name }}</a>\n        </li>\n        <li *ngIf=\"user\" class=\"auth\">\n            <img [src]=\"user.photo\" class=\"profile-photo\" routerLink=\"profile\" />\n        </li>\n        <li *ngIf=\"user\">\n            <a routerLink=\"create-a-goal\" aria-hidden=\"true\"><i class=\"fa fa-plus\" aria-hidden=\"true\"></i> Create</a>  \n        </li>\n    </ul>\n\n</div>\n\n\n\n<div>\n    <router-outlet></router-outlet>\n</div>\n\n<footer class=\"text-center\">\n        <p>Company Name &copy; 2018</p>\n</footer> "
 
 /***/ }),
 
@@ -457,7 +457,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngFor=\"let task of tasks\">\n      <a routerLink=\"{{task._id}}\">{{task.title}}  {{task.startDate | date}} {{task.endDate | date}}</a> \n</div>\n"
+module.exports = "<ul>\n      <li *ngFor=\"let task of tasks\"> \n            <a routerLink=\"{{task._id}}\">{{task.title}} {{task.startDate | date}} {{task.endDate | date}}</a>\n      </li>\n\n</ul>"
 
 /***/ }),
 
@@ -491,6 +491,10 @@ var GoalForumHomeComponent = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
         __metadata("design:type", Array)
     ], GoalForumHomeComponent.prototype, "tasks", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], GoalForumHomeComponent.prototype, "goal", void 0);
     GoalForumHomeComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-goal-forum-home',
@@ -570,7 +574,7 @@ var GoalForumRoutingModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "img{\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    margin: 10px;\n}"
+module.exports = "img{\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    margin: 10px;\n} \n\n.card{\n    margin-bottom: 50px;\n} \n\n.action{\n    margin: 10px\n} \n\n.task-title{\n    display: inline;\n    margin-right: 50px;\n} \n\n.create-task{\n    float: right\n} \n\n.task-home{\n    margin-top: 30px;\n}\n "
 
 /***/ }),
 
@@ -581,7 +585,7 @@ module.exports = "img{\n    border-radius: 50%;\n    width: 50px;\n    height: 5
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<p>\n  Goal Forum\n</p>\n\n<ng-container *ngFor=\"let participant of participants\">\n  <img [src]=\"participant.photo || '../assets/default-profile.jpeg'\" alt=\"your image\" />\n</ng-container>\n\n<button (click)=\"createTask()\">Create Task</button>\n<app-goal-forum-home [tasks]=\"tasks\"></app-goal-forum-home>\n<router-outlet></router-outlet>\n"
+module.exports = "<div class=\"container\" style=\"margin-top:30px\">\n  <div class=\"row\">\n    <div class=\"col-sm-4\">\n      <div class=\"card\">\n        <div class=\"card-body\">\n          <h2 class=\"card-title goal-title\">{{goal?.title}}</h2>\n          <div class=\"action\" *ngIf=\"auth.userID\">\n            <button *ngIf=\"goal?.creator !== auth.userID && goal?.participants.indexOf(auth.userID) === -1\" class=\"btn btn-primary\" (click)=\"join()\">Join</button>\n            <button *ngIf=\"goal?.participants.indexOf(auth.userID) !== -1\" class=\"btn btn-warning\" (click)=\"quit()\">Quit</button>\n            <button *ngIf=\"goal?.creator == auth.userID\" class=\"btn btn-danger\" (click)=\"delete()\">Delete</button>\n          </div>\n          <ul class=\"list-group list-group-flush\">\n            <li class=\"list-group-item\">credit: {{goal?.entryCredit}}</li>\n            <li class=\"list-group-item\">start: {{goal?.startDate | date: 'M/d/yy'}}</li>\n            <li class=\"list-group-item\">end: {{goal?.startDate | date: 'M/d/yy'}}</li>\n            <li class=\"list-group-item\">maximum users: {{goal?.maxUser}}</li>\n          </ul>\n        </div>\n      </div>\n\n      <div class=\"card\">\n        <div class=\"card-body\">\n          <h2 class=\"card-title goal-title\">Team</h2>\n          <h5>Created by: photo of creator</h5>\n          <img *ngFor=\"let participant of participants\" [src]=\"participant.photo || '../assets/default-profile.jpeg'\" alt=\"your image\"\n          />\n          <img *ngFor=\"let participant of participants\" [src]=\"participant.photo || '../assets/default-profile.jpeg'\" alt=\"your image\"\n          />\n          <img *ngFor=\"let participant of participants\" [src]=\"participant.photo || '../assets/default-profile.jpeg'\" alt=\"your image\"\n          />\n        </div>\n      </div>\n\n      <ul class=\"nav nav-pills flex-column\">\n        <li class=\"nav-item\">\n          <a class=\"nav-link active\" href=\"#\">Active</a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"#\">Link</a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link\" href=\"#\">Link</a>\n        </li>\n        <li class=\"nav-item\">\n          <a class=\"nav-link disabled\" href=\"#\">Disabled</a>\n        </li>\n      </ul>\n      <hr class=\"d-sm-none\">\n    </div>\n    <div class=\"col-sm-8\">\n      <h2>GOAL DESCRIPTION</h2>\n      <h5>LAST MODIFIED, Dec 7, 2017</h5>\n      <p></p>\n      <p></p>\n      <p>{{goal?.description}} Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed\n        do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation\n        ullamco.\n      </p>\n      <br>\n      <div class=\"card\">\n        <div class=\"card-body\">\n          <h2 class=\"card-title task-title\">Task</h2>\n          <button class=\"btn btn-primary create-task\" (click)=\"createTask()\">Create Task</button>\n          <div class=\"task-home\">\n            <app-goal-forum-home [tasks]=\"tasks\"></app-goal-forum-home>\n          </div>\n        </div>\n      </div>\n\n      <router-outlet></router-outlet>\n    </div>\n  </div>\n</div>"
 
 /***/ }),
 
@@ -597,9 +601,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GoalForumComponent", function() { return GoalForumComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
-/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
-/* harmony import */ var _create_a_task_create_a_task_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./create-a-task/create-a-task.component */ "./src/app/goal-forum/create-a-task/create-a-task.component.ts");
+/* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
+/* harmony import */ var _angular_material__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material */ "./node_modules/@angular/material/esm5/material.es5.js");
+/* harmony import */ var _create_a_task_create_a_task_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./create-a-task/create-a-task.component */ "./src/app/goal-forum/create-a-task/create-a-task.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -614,16 +619,18 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var GoalForumComponent = /** @class */ (function () {
-    function GoalForumComponent(route, router, api, dialog) {
+    function GoalForumComponent(route, router, api, dialog, auth) {
         this.route = route;
         this.router = router;
         this.api = api;
         this.dialog = dialog;
+        this.auth = auth;
+        this.goalID = this.route.snapshot.paramMap.get('id');
     }
     GoalForumComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this.goalID = this.route.snapshot.paramMap.get('id');
         this.api.get('/task', '/tasks', { id: this.goalID }).subscribe(function (tasks) {
             _this.tasks = tasks;
         });
@@ -636,7 +643,7 @@ var GoalForumComponent = /** @class */ (function () {
     };
     GoalForumComponent.prototype.createTask = function () {
         var _this = this;
-        var dialogRef = this.dialog.open(_create_a_task_create_a_task_component__WEBPACK_IMPORTED_MODULE_4__["CreateATaskComponent"], {
+        var dialogRef = this.dialog.open(_create_a_task_create_a_task_component__WEBPACK_IMPORTED_MODULE_5__["CreateATaskComponent"], {
             width: '500px',
             data: { goalTitle: this.goal.title }
         });
@@ -649,6 +656,31 @@ var GoalForumComponent = /** @class */ (function () {
             }
         });
     };
+    GoalForumComponent.prototype.join = function () {
+        var _this = this;
+        this.api.post('/goal', '/join', { goalID: this.goal._id }).subscribe(function (res) {
+            _this.goal = res;
+            _this.participants.push(_this.auth.user);
+        });
+    };
+    GoalForumComponent.prototype.delete = function () {
+        var _this = this;
+        if (confirm('Are you sure you want to delete this goal')) {
+            this.api.delete('/goal', '/delete', { id: this.goal._id }).subscribe(function (res) {
+                _this.router.navigate(['/home']);
+            });
+        }
+    };
+    GoalForumComponent.prototype.quit = function () {
+        var _this = this;
+        if (confirm('Are you sure you want to quit this goal?')) {
+            this.api.post('/goal', '/quit', { goalID: this.goal._id }).subscribe(function (res) {
+                _this.goal = res;
+                var index = _this.participants.findIndex(function (par) { return par._id == _this.auth.userID; });
+                _this.participants.splice(index, 1);
+            });
+        }
+    };
     GoalForumComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             template: __webpack_require__(/*! ./goal-forum.component.html */ "./src/app/goal-forum/goal-forum.component.html"),
@@ -656,8 +688,9 @@ var GoalForumComponent = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivatedRoute"],
             _angular_router__WEBPACK_IMPORTED_MODULE_1__["Router"],
-            _services_api_service__WEBPACK_IMPORTED_MODULE_2__["ApiService"],
-            _angular_material__WEBPACK_IMPORTED_MODULE_3__["MatDialog"]])
+            _services_api_service__WEBPACK_IMPORTED_MODULE_3__["ApiService"],
+            _angular_material__WEBPACK_IMPORTED_MODULE_4__["MatDialog"],
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
     ], GoalForumComponent);
     return GoalForumComponent;
 }());
@@ -742,7 +775,7 @@ var GoalForumModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".mat-form-field{\n    width: 100%;\n}\n\nimg{\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    margin: 10px;\n}\n"
+module.exports = ".mat-form-field{\n    width: 100%;\n}\n\nimg{\n    border-radius: 50%;\n    width: 50px;\n    height: 50px;\n    -o-object-fit: cover;\n       object-fit: cover;\n    margin: 10px;\n}\n\n.right{\n    float: right;\n}\n"
 
 /***/ }),
 
@@ -753,7 +786,7 @@ module.exports = ".mat-form-field{\n    width: 100%;\n}\n\nimg{\n    border-radi
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-form-field appearance=\"outline\">\n    <mat-label>Comment</mat-label>\n    <textarea rows=\"4\" cols=\"50\" type=\"text\" matInput #comment></textarea > \n</mat-form-field> \n\n<button (click)=\"addComment(comment.value)\">add</button>\n\n\n<div *ngFor=\"let comment of comments\">\n  {{comment.comment}}\n  {{comment.createdTime}}\n  <img [src]=\"comment.creatorDetail.photo || '../assets/default-profile.jpeg'\" alt=\"your image\" />\n  <button (click)=\"deleteComment(comment)\">delete</button>\n</div>\n"
+module.exports = "<mat-form-field appearance=\"outline\">\n  <mat-label>Comment</mat-label>\n  <textarea rows=\"4\" cols=\"50\" type=\"text\" matInput #comment></textarea >\n    <button class=\"btn btn-info right\" (click)=\"addComment(comment.value)\">Add</button> \n</mat-form-field>  \n\n<div *ngFor=\"let comment of comments\"> \n      {{comment.comment}}  \n      {{comment.createdTime | date: 'M/d/yy, h:mm a'}}\n      {{comment.creatorDetail.name}} \n      <button *ngIf=\"comment.creatorDetail._id === auth.userID\" class=\"btn\"><i (click)=\"deleteComment(comment)\" class=\"fa fa-trash\" aria-hidden=\"true\" style=\"color: grey\"></i> </button> \n</div>"
 
 /***/ }),
 
@@ -812,6 +845,7 @@ var GoalTaskComponent = /** @class */ (function () {
             _this.comments.push(comment);
             _this.comments.sort(function (a, b) { return b.createdTime - a.createdTime; });
         });
+        this.newComment.nativeElement.value = '';
     };
     GoalTaskComponent.prototype.deleteComment = function (comment) {
         var _this = this;
@@ -819,6 +853,10 @@ var GoalTaskComponent = /** @class */ (function () {
             _this.comments = _this.comments.filter(function (com) { return com._id !== comment._id; });
         });
     };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('comment'),
+        __metadata("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"])
+    ], GoalTaskComponent.prototype, "newComment", void 0);
     GoalTaskComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
             selector: 'app-goal-task',
@@ -855,7 +893,7 @@ module.exports = "div.card {\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = " <div [class.enter] = \"enter\" class=\"card\" (click)=\"detail()\">\n    <div class=\"card-body\">\n        <i class=\"fa fa-circle\" [style.color]=\"\"></i> <h4 class=\"card-title\">{{goal.title}}</h4>\n        <p class=\"card-text\">{{goal.description}}</p> \n    </div>\n    <div class=\"card-footer\">{{goal.startDate | date: 'M/d/yy'}} - {{goal.endDate | date: 'M/d/yy'}}   <i class=\"fa fa-usd\" style=\"color:#f7e85d\"></i>{{goal.entryCredit}}</div> \n</div>"
+module.exports = " <div [class.enter] = \"enter\" class=\"card\" (click)=\"detail()\">\n    <div class=\"card-body\">\n        <i class=\"fa fa-circle\" [style.color]=\"getColor()\"></i> <h4 class=\"card-title\">{{goal.title}}</h4>\n        <p class=\"card-text\">{{goal.description}}</p> \n    </div>\n    <div class=\"card-footer\">{{goal.startDate | date: 'M/d/yy'}} - {{goal.endDate | date: 'M/d/yy'}}   <i class=\"fa fa-usd\" style=\"color:#f7e85d\"></i>{{goal.entryCredit}}</div> \n</div>"
 
 /***/ }),
 
@@ -895,27 +933,22 @@ var GoalComponent = /** @class */ (function () {
     }
     GoalComponent.prototype.ngOnInit = function () {
     };
+    GoalComponent.prototype.getColor = function () {
+        if (this.auth.userID == this.goal.creator) {
+            return 'red';
+        }
+        else if (this.goal.participants.indexOf(this.auth.userID) !== -1) {
+            return 'blue';
+        }
+        else {
+            return 'green';
+        }
+    };
     GoalComponent.prototype.mouseEnter = function () {
         this.enter = true;
     };
     GoalComponent.prototype.onMouseLeave = function () {
         this.enter = false;
-    };
-    GoalComponent.prototype.join = function () {
-        var _this = this;
-        this.api.post('/goal', '/join', { goalID: this.goal._id }).subscribe(function (res) {
-            _this.goal = res;
-        });
-    };
-    GoalComponent.prototype.delete = function () {
-        this.api.delete('/goal', '/delete', { id: this.goal._id }).subscribe(function (res) {
-        });
-    };
-    GoalComponent.prototype.quit = function () {
-        var _this = this;
-        this.api.post('/goal', '/quit', { goalID: this.goal._id }).subscribe(function (res) {
-            _this.goal = res;
-        });
     };
     GoalComponent.prototype.detail = function () {
         this.router.navigate(['/forum', this.goal._id]);
@@ -960,7 +993,7 @@ var GoalComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".center {\n    margin: auto;\n    width: 100%; \n    padding: 10px;\n} \n\n.jumbotron{\n    height: 300px\n} \n\n.col-sm-4{\n    padding: 20px;\n}\n \n"
+module.exports = ".center {\n    margin: auto;\n    width: 100%; \n    padding: 10px;\n}  \n \n.col-sm-4{\n    padding: 20px;\n}\n \n"
 
 /***/ }),
 
@@ -971,7 +1004,7 @@ module.exports = ".center {\n    margin: auto;\n    width: 100%; \n    padding: 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"home\">\n    <div class=\"jumbotron text-center\">\n        <h1>Finish Your Goal Today</h1>\n        <p>A journey of a thousand miles begins with single step</p>\n    </div>\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-sm-4\" *ngFor=\"let goal of createdGoals\">\n                <app-goal [goal]=\"goal\"></app-goal>\n            </div>\n            <div class=\"col-sm-4\" *ngFor=\"let goal of joinedGoals\">\n                <app-goal [goal]=\"goal\"></app-goal>\n            </div> \n        </div>\n    </div> \n     \n</div>"
+module.exports = "<div class=\"home\">\n    <div class=\"jumbotron text-center\">\n        <h1>Finish Your Goal Today</h1>\n        <p>A journey of a thousand miles begins with single step</p>\n    </div>\n    <div class=\"container\">\n        <div class=\"row\">\n            <div class=\"col-sm-4\" *ngFor=\"let goal of createdGoals\">\n                <app-goal [goal]=\"goal\"></app-goal>\n            </div>\n            <div class=\"col-sm-4\" *ngFor=\"let goal of joinedGoals\">\n                <app-goal [goal]=\"goal\"></app-goal>\n            </div> \n        </div>\n    </div>  \n</div>"
 
 /***/ }),
 
@@ -1116,7 +1149,7 @@ var LoginComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "img{ \n    width: 40%;\n    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);\n    text-align: center; \n    margin: 40px;\n}\n\n.centered{  \n    margin: auto; \n    width: 40%; \n    margin-top: 5%;\n}\n\n.mat-form-field {\n    width: 100%\n}"
+module.exports = "img{\n    overflow: hidden;\n}\n.centered{  \n    margin: auto; \n    width: 40%; \n    margin-top: 5%;\n}\n.mat-form-field {\n    width: 100%\n}"
 
 /***/ }),
 
@@ -1127,7 +1160,7 @@ module.exports = "img{ \n    width: 40%;\n    box-shadow: 0 4px 8px 0 rgba(0, 0,
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ng-container *ngIf=\"user\">\n  <img id=\"\" [src]=\"user.photo\" alt=\"your image\" />\n  <input type=\"file\" (change)=\"onFileChange($event)\">\n\n\n  <div class=\"container centered\">\n    <div>\n      <h1>\n        <span class=\"fa fa-sign-in\"></span> {{ user.name }} </h1>\n      <form [formGroup]=\"profileForm\" (ngSubmit)=\"updateProfile()\">\n        <mat-form-field appearance=\"outline\">\n          <mat-label>Username</mat-label>\n          <input type=\"text\" matInput formControlName=\"name\" required>\n          <mat-error>username can't be empty</mat-error>\n        </mat-form-field>\n\n        <mat-form-field appearance=\"outline\">\n          <mat-label>Email</mat-label>\n          <input type=\"email\" matInput formControlName=\"email\" required>\n          <mat-error>email can't be empty!</mat-error>\n        </mat-form-field>\n\n        <button class=\"btn btn-danger btn-lg\" mat-button type=\"submit\" [disabled]=\"!profileForm.valid || loading\">Submit\n          <i class=\"fa fa-spinner fa-spin fa-fw\" *ngIf=\"loading\"></i>\n        </button>\n      </form>\n\n    </div>\n  </div>\n</ng-container>"
+module.exports = "<ng-container *ngIf=\"user\">\n  <div class=\"container\" style=\"margin-top:30px\">\n    <div class=\"row\">\n      <div class=\"col-sm-4\">\n        <div class=\"container\"> \n          <div class=\"card\">\n            <img class=\"card-img-top\" [src]=\"user.photo\" alt=\"{{user?.name}}\" style=\"width:100%\">\n            <div class=\"card-body\">\n              <h4 class=\"card-title\">\n                <h2>{{ user?.name }} </h2>\n              </h4>\n              <p class=\"card-text\">Some example text some example text. John Doe is an architect and engineer</p>\n              <input [hidden]=\"true\" type=\"file\" (change)=\"onFileChange($event)\" #photo>\n              <button class=\"btn btn-primary\" (click)=\"photo.click()\">Choose Photo</button>\n            </div>\n          </div>\n          <br>\n        </div>\n      </div>\n      <div class=\"col-sm-8\">\n\n        <form [formGroup]=\"profileForm\" (ngSubmit)=\"updateProfile()\">\n          <mat-form-field appearance=\"outline\">\n            <mat-label>Username</mat-label>\n            <input type=\"text\" matInput formControlName=\"name\" required>\n            <mat-error>username can't be empty</mat-error>\n          </mat-form-field>\n\n          <mat-form-field appearance=\"outline\">\n            <mat-label>Email</mat-label>\n            <input type=\"email\" matInput formControlName=\"email\" required>\n            <mat-error>email can't be empty!</mat-error>\n          </mat-form-field>\n\n          <button class=\"btn btn-danger btn-lg\" mat-button type=\"submit\" [disabled]=\"!profileForm.valid || loading\">Submit\n            <i class=\"fa fa-spinner fa-spin fa-fw\" *ngIf=\"loading\"></i>\n          </button>\n        </form>\n      </div>\n    </div>\n  </div>\n</ng-container>"
 
 /***/ }),
 
@@ -1144,8 +1177,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _services_api_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../services/api.service */ "./src/app/services/api.service.ts");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1159,29 +1191,33 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
-
 var ProfileComponent = /** @class */ (function () {
-    function ProfileComponent(api, auth, router) {
-        var _this = this;
+    function ProfileComponent(api, auth) {
         this.api = api;
         this.auth = auth;
-        this.router = router;
         this.loading = false;
-        this.api.get('', '/isLoggedIn', {}).subscribe(function (user) {
-            if (user === null) {
-                _this.router.navigate(['/login']);
-            }
-            else {
-                _this.user = user;
-                _this.profileForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormGroup"]({
-                    name: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"](user.name, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
-                    email: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"](user.email, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
-                    photo: new _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormControl"](null)
-                });
-            }
-        });
     }
     ProfileComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        if (!this.auth.user) {
+            this.api.get('', '/sessionUser', {}).subscribe(function (user) {
+                console.log(user);
+                _this.user = user;
+                _this.profileForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
+                    name: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](_this.user.name, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required),
+                    email: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](_this.user.email, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required),
+                    photo: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null)
+                });
+            });
+        }
+        else {
+            this.user = this.auth.user;
+            this.profileForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormGroup"]({
+                name: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](this.user.name, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required),
+                email: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](this.user.email, _angular_forms__WEBPACK_IMPORTED_MODULE_3__["Validators"].required),
+                photo: new _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormControl"](null)
+            });
+        }
     };
     ProfileComponent.prototype.onFileChange = function (event) {
         var _this = this;
@@ -1207,8 +1243,7 @@ var ProfileComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./profile.component.css */ "./src/app/profile/profile.component.css")]
         }),
         __metadata("design:paramtypes", [_services_api_service__WEBPACK_IMPORTED_MODULE_1__["ApiService"],
-            _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
+            _services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
     ], ProfileComponent);
     return ProfileComponent;
 }());
@@ -1224,7 +1259,7 @@ var ProfileComponent = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ""
+module.exports = ".col-sm-4{\n    padding: 20px\n}"
 
 /***/ }),
 
@@ -1235,7 +1270,7 @@ module.exports = ""
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ng-container *ngIf=\"auth.isLogin\">\n    login\n    <app-goal *ngFor=\"let goal of goals\" [goal]=\"goal\">\n    </app-goal>\n</ng-container>\n\n<ng-container *ngIf=\"!auth.isLogin\">\n    not login\n    <app-goal *ngFor=\"let goal of goals\" [goal]=\"goal\">\n    </app-goal>\n</ng-container>"
+module.exports = "<div class=\"jumbotron text-center\">\n    <h1>Explore what others are working on</h1>\n    <p>A journey of a thousand miles begins with single step</p>\n</div>\n<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-sm-4\" *ngFor=\"let goal of goals\">\n            <app-goal [goal]=\"goal\"></app-goal>\n        </div> \n    </div>\n</div>"
 
 /***/ }),
 

@@ -17,24 +17,28 @@ export class ProfileComponent implements OnInit {
   user: User;
 
   constructor(private api: ApiService,
-    public auth: AuthService,
-    private router: Router) {
-    this.api.get('', '/isLoggedIn', {}).subscribe(user => { 
-      if (user === null) {
-        this.router.navigate(['/login']); 
-      }else{
-        this.user = user;
-        this.profileForm = new FormGroup({
-          name: new FormControl(user.name, Validators.required),
-          email: new FormControl(user.email, Validators.required),
-          photo: new FormControl(null)
-        });
-      }
-    });
+    public auth: AuthService) {  
   }
 
   ngOnInit() {
-
+    if(!this.auth.user){
+      this.api.get('', '/sessionUser',{}).subscribe(user => {
+        console.log(user);
+        this.user = user;
+        this.profileForm = new FormGroup({
+          name: new FormControl(this.user.name, Validators.required),
+          email: new FormControl(this.user.email, Validators.required),
+          photo: new FormControl(null)
+        }); 
+      })
+    }else{
+      this.user = this.auth.user;
+      this.profileForm = new FormGroup({
+        name: new FormControl(this.user.name, Validators.required),
+        email: new FormControl(this.user.email, Validators.required),
+        photo: new FormControl(null)
+      }); 
+    }    
   }
 
   onFileChange(event) {
