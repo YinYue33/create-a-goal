@@ -12,15 +12,8 @@ var goalsRoute = require('./routes/goalsRoute');
 var userRoute = require('./routes/userRoute');
 var commonRoute = require('./routes/commonRoute');
 var taskRoute = require('./routes/taskRoute');  
-var sessionSecret;
-
-if (process.env.NODE_ENV === 'production') {
-  sessionSecret = process.env.SESSION_SECRET;
-  //sessionSecret = require('./config/environment').sessionSecret;
-}else{
-  sessionSecret = require('./config/environment').sessionSecret;
-}
-
+var sessionSecret = process.env.SESSION_SECRET || require('./config/environment').sessionSecret;
+ 
 require('./config/passport')(passport);
 require('./config/db'); 
 
@@ -35,7 +28,7 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({limit: '5mb'}, { extended: false })); //limit is for profile photo
 app.use(bodyParser.json({limit: '5mb'}));  
 
-app.use(session({ secret: 'Thespywhodumpedme', resave: false, saveUninitialized:true, cookie: {expires: 3600000}})); // session secret
+app.use(session({ secret: sessionSecret, resave: false, saveUninitialized:true, cookie: {expires: 3600000}})); // session secret
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());  
