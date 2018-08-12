@@ -11,15 +11,13 @@ var passport = require('passport');
 var goalsRoute = require('./routes/goalsRoute');
 var userRoute = require('./routes/userRoute');
 var commonRoute = require('./routes/commonRoute');
-var taskRoute = require('./routes/taskRoute');
-
-var environment = require('./config/environment');
+var taskRoute = require('./routes/taskRoute');  
 var sessionSecret;
 
 if (process.env.NODE_ENV === 'production') {
   session = process.env.SESSION_SECRET;
 }else{
-  sessionSecret = environment.sessionSecret;
+  sessionSecret = require('./config/environment').sessionSecret;
 }
 
 require('./config/passport')(passport);
