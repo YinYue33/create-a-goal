@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
       this.user = user;
     }); 
     if(!this.auth.userID){ 
-      //this.router.navigate(['/login']);
+      this.router.navigate(['/login']);
     }
   }
 
