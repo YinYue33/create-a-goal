@@ -1519,7 +1519,7 @@ module.exports = ".mat-form-field {\n    width: 100%\n}\n\n.centered{  \n    mar
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"cover-picture\">\n\n<div class=\"title-group\">\n        <p class=\"title\">A journey of a thousand miles</p>\n        <p class=\"title\">begins with single step</p> \n</div>\n</div>\n\n<div class=\"container centered\"> \n    <div> \n        <h1>\n            <span class=\"fa fa-sign-in\"></span> Signup</h1>\n        <!-- LOGIN FORM -->\n        <h1 *ngIf=\"signupErrorMessage !== null\">Sign up failed! {{signupErrorMessage}}</h1>\n        <form [formGroup]=\"signupForm\" (ngSubmit)=\"signup()\">\n            <mat-form-field appearance=\"outline\">\n                <mat-label>Username</mat-label>\n                <input type=\"text\" matInput formControlName=\"name\" required>\n                <mat-error>I'd like to know your name</mat-error>\n            </mat-form-field>\n\n            <mat-form-field appearance=\"outline\">\n                <mat-label>Email</mat-label>\n                <input type=\"email\" matInput formControlName=\"email\" required>\n                <mat-error>Keep in touch!</mat-error>\n            </mat-form-field>\n\n            <mat-form-field appearance=\"outline\">\n                <mat-label>Password</mat-label>\n                <input type=\"password\" matInput formControlName=\"password\" required>\n                <mat-error>Don't forget about your password!</mat-error>\n            </mat-form-field>\n\n            <button class=\"btn btn-danger btn-lg\" mat-button type=\"submit\" [disabled]=\"!signupForm.valid\">Submit</button>\n        </form>\n\n        <hr>\n\n        <p>Already have an account?\n            <a routerLink=\"../login\">Login</a>\n        </p>\n\n    </div>\n</div>"
+module.exports = "<div class=\"cover-picture\">\n\n    <div class=\"title-group\">\n        <p class=\"title\">A journey of a thousand miles</p>\n        <p class=\"title\">begins with single step</p>\n    </div>\n</div>\n\n<div class=\"container centered\">\n    <div>\n        <h1>\n            <span class=\"fa fa-sign-in\"></span> Signup</h1>\n        <form [formGroup]=\"signupForm\" (ngSubmit)=\"signup()\">\n            <mat-form-field appearance=\"outline\">\n                <mat-label>Username</mat-label>\n                <input type=\"text\" matInput formControlName=\"name\" required><i class=\"fa fa-spinner\" *ngIf=\"signupForm.controls.name.pending\"></i>\n                <mat-error>\n                    <ng-container *ngIf=\"signupForm.controls.name.errors?.required\">I'd like to know your name</ng-container>\n                    <ng-container *ngIf=\"signupForm.controls.name.errors?.nameExist\">Name taken</ng-container>\n                </mat-error> \n            </mat-form-field>\n\n            <mat-form-field appearance=\"outline\">\n                <mat-label>Email</mat-label>\n                <input type=\"email\" matInput formControlName=\"email\" required><i class=\"fa fa-spinner\" *ngIf=\"signupForm.controls.email.pending\"></i>\n                <mat-error>\n                    <ng-container *ngIf=\"signupForm.controls.email.errors?.required\">I'd like to know your email</ng-container>\n                    <ng-container *ngIf=\"signupForm.controls.email.errors?.emailExist\">Email taken</ng-container>\n                </mat-error> \n            </mat-form-field>\n\n            <mat-form-field appearance=\"outline\">\n                <mat-label>Password</mat-label>\n                <input type=\"password\" matInput formControlName=\"password\" required>\n                <mat-error>Don't forget about your password!</mat-error>\n            </mat-form-field>\n\n            <button class=\"btn btn-danger btn-lg\" mat-button type=\"submit\" [disabled]=\"!signupForm.valid\">Submit</button>\n        </form>\n\n        <hr>\n\n        <p>Already have an account?\n            <a routerLink=\"../login\">Login</a>\n        </p>\n\n    </div>\n</div>"
 
 /***/ }),
 
@@ -1538,6 +1538,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _services_auth_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../services/auth.service */ "./src/app/services/auth.service.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1552,22 +1553,37 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 
+
 var SignupComponent = /** @class */ (function () {
     function SignupComponent(api, router, auth) {
         this.api = api;
         this.router = router;
         this.auth = auth;
         this.signupForm = new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormGroup"]({
-            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
-            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required),
+            name: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, {
+                validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+                asyncValidators: [this.checkIsNameExit(this.api)],
+                updateOn: 'blur'
+            }),
+            email: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, {
+                validators: [_angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required],
+                asyncValidators: [this.checkIsEmailExit(this.api)],
+                updateOn: 'blur'
+            }),
             password: new _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormControl"](null, _angular_forms__WEBPACK_IMPORTED_MODULE_2__["Validators"].required)
         });
         this.signupErrorMessage = null;
     }
-    SignupComponent.prototype.ngOnInit = function () {
-    };
+    SignupComponent.prototype.ngOnInit = function () { };
     SignupComponent.prototype.signup = function () {
         this.auth.signup(this.signupForm.value);
+    };
+    SignupComponent.prototype.checkIsNameExit = function (api) {
+        return function (ctrl) { return api.get('/user', '/isNameExist', { name: ctrl.value }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (isExist) { return (isExist ? { nameExist: true } : null); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function () { return null; })); };
+    };
+    SignupComponent.prototype.checkIsEmailExit = function (api) {
+        var _this = this;
+        return function (ctrl) { return _this.api.get('/user', '/isEmailExist', { email: ctrl.value }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (isExist) { return (isExist ? { emailExist: true } : null); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["catchError"])(function () { return null; })); };
     };
     SignupComponent = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
@@ -1646,7 +1662,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/yueyin/CreateAGoal/create-a-goal/client/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /Users/yueyin/CreateAGoal/client/src/main.ts */"./src/main.ts");
 
 
 /***/ })

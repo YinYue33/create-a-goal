@@ -15,6 +15,22 @@ exports.putUser = (req, res, next) => {
             }  
         });
     }); 
+};
+
+exports.isNameExist = (req, res, next) => { 
+    User.findOne({ 'name': req.query.name}, (err, user) => { 
+        if(err) return next(err);
+        if(user) res.status(200).send(JSON.stringify(1));
+        else res.status(200).send(JSON.stringify(0))
+    })
+};
+
+exports.isEmailExist = (req, res, next) => {
+    User.findOne({ 'email': req.query.email}, (err, user) => {
+        if(err) return next(err);
+        if(user) res.status(200).send(JSON.stringify(1));
+        else res.status(200).send(JSON.stringify(0));
+    })
 }
  
  

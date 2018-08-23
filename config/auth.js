@@ -7,5 +7,5 @@ exports.isLoggedIn = (req, res, next) => {
 
 exports.isSelf = (req, res, next) => { 
     if(req.user.id == req.params.id) return next();
-    res.status(401).send('You can\'t access others information');
+    res.status(401).send('You can\'t ever access others information');
 }

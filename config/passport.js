@@ -26,6 +26,8 @@ module.exports = function (passport) {
                 if (err) return done(err);
                 if (user) return done(null, false, req.flash('error', 'email taken'));
                 User.findOne({ 'name': req.body.name }, (err, user) => {
+                    console.log(req.body.name);
+                    console.log(user);
                     if (err) return done(err);
                     if (user) return done(null, false, req.flash('error', 'name taken'));
                     var newUser = new User(); 
